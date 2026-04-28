@@ -107,3 +107,527 @@ Active contradictions noted:
    Status: Acknowledged. The artifact presents Karpathy's argument for wiki superiority but explicitly notes RAG advantages at large scale.
 
 No unresolved factual contradictions.
+
+---
+
+## [2026-04-16] ingest | Claude Cowork Context File
+
+Source: raw/deep-research/claude-cowork.ctx.md
+Mode: skill-spec
+Mode confidence: high
+
+Artifacts produced:
+- distilled/patterns/goal-state-execution.md (high confidence)
+- distilled/patterns/file-handoff-state-machine.md (high confidence)
+- distilled/patterns/prompt-as-architectural-brief.md (high confidence, co-sourced with 3 others)
+- distilled/failures/ambiguity-as-silent-execution.md (high confidence, co-sourced with 2 others)
+- distilled/references/claude-cowork-architecture.md (medium confidence)
+
+Notes:
+- Rich source with 8 documented failure modes and repair strategies
+- Two patterns extracted as transferable cross-cutting artifacts (prompt-as-architectural-brief, ambiguity-as-silent-execution) with evidence from this source combined with other sources
+- Goal-state execution (Done Framework) is a transferable agent orchestration pattern
+- File Handoff pattern solves context bloat in multi-agent systems
+
+---
+
+## [2026-04-16] ingest | Gemini Deep Research Context File
+
+Source: raw/deep-research/gemini-deep-research.ctx.md
+Mode: skill-spec
+Mode confidence: high
+
+Artifacts produced:
+- distilled/patterns/uncertainty-and-conflict-protocol.md (high confidence)
+- distilled/patterns/prompt-as-architectural-brief.md (co-sourced)
+- distilled/failures/ambiguity-as-silent-execution.md (co-sourced)
+- distilled/failures/hallucinated-data-on-missing-evidence.md (high confidence)
+- distilled/references/gemini-deep-research-parameters.md (medium confidence)
+
+Notes:
+- Uncertainty protocol is critical and broadly transferable — agents fabricate rather than admit absence
+- Conflict resolution as analytical output is a novel prompting technique
+- Up to 160 web queries and 900k tokens per task — significant resource envelope
+- Source policy (whitelist/blacklist) prevents browsing drift to SEO garbage
+
+---
+
+## [2026-04-16] dedupe | LLM Wiki Context File
+
+Source: raw/deep-research/llm-wiki.ctx.md
+Mode: skill-spec
+Mode confidence: high
+
+Artifacts produced: NONE (dedupe resolution)
+
+Dedupe decision:
+- Heavy overlap with existing artifacts:
+  - wiki-vs-rag.md — same core thesis (wiki beats RAG)
+  - three-layer-knowledge-architecture.md — same architecture (raw/wiki/schema)
+  - idea-file-as-knowledge-seed.md — same concept (idea file as portable seed)
+- Unique content (setup prompt architecture: domain declaration, source inventory, tool preferences) is a specialization of the idea-file pattern, not a distinct concept
+- Resolution: Added as supplementary evidence to 3 existing artifacts. No new artifact created.
+
+Existing artifacts augmented:
+- distilled/patterns/idea-file-as-knowledge-seed.md — added evidence re: binding constraints (domain, platform, sources, tooling)
+- distilled/patterns/three-layer-knowledge-architecture.md — added evidence re: full paste triggering full pattern
+- distilled/concepts/wiki-vs-rag.md — added evidence re: persistent schema behavior
+
+---
+
+## [2026-04-16] ingest | Midjourney V8 Context File
+
+Source: raw/deep-research/midjourney.ctx.md
+Mode: skill-spec
+Mode confidence: high
+
+Artifacts produced:
+- distilled/patterns/explicit-component-ordering.md (high confidence, co-sourced with Veo3 + Cowork + Gemini DR)
+- distilled/failures/keyword-salad-prompt-collapse.md (high confidence)
+- distilled/references/midjourney-v8-calibration.md (medium confidence)
+
+Notes:
+- V8's shift to "literal executor" is a paradigm change from V7's "artistic interpreter"
+- Keyword salad failure is broadly generalizable beyond image generation
+- Rich calibration data (--s, --sw, --chaos ranges) — medium confidence because V8 is alpha and parameters may evolve
+- Typography requires double-quote clusters of max 4 words — novel V8 capability
+
+---
+
+## [2026-04-16] ingest | Veo3 Context File
+
+Source: raw/deep-research/veo3.ctx.md
+Mode: skill-spec
+Mode confidence: high
+
+Artifacts produced:
+- distilled/patterns/explicit-component-ordering.md (co-sourced)
+- distilled/patterns/delta-only-continuation.md (high confidence)
+- distilled/references/veo3-production-parameters.md (medium confidence)
+
+Notes:
+- Joint audio-video latent denoising is architecturally distinctive — audio is not post-processing
+- Dialogue syntax (colon+quotes) is a hard routing token requirement, not formatting preference
+- Delta-only continuation pattern is transferable to any iterative AI workflow
+- Component ordering (Camera→Subject→Action→Context→Style→Audio→Negatives) is architecturally mandated
+
+---
+
+## [2026-04-16] quality | Dedupe Check — Wave 2
+
+Checked all 12 new artifacts for overlap with existing 10 and with each other.
+
+Cross-artifact overlaps managed:
+- prompt-as-architectural-brief.md draws evidence from 4 sources (Cowork, Gemini DR, LLM Wiki, Veo3) — single artifact, not 4 separate ones
+- explicit-component-ordering.md draws evidence from 4 sources (Veo3, MJ V8, Cowork, Gemini DR) — single artifact, not 4 separate ones
+- ambiguity-as-silent-execution.md draws evidence from 3 sources (Cowork, Gemini DR, Veo3) — single artifact
+
+Potential overlaps reviewed:
+- uncertainty-and-conflict-protocol.md vs hallucinated-data-on-missing-evidence.md: Kept separate. Protocol is the pattern (repair); hallucinated data is the failure mode (problem). Pattern references failure.
+- goal-state-execution.md vs prompt-as-architectural-brief.md: Kept separate. Goal-state is a specific execution model; architectural brief is a general prompting paradigm. Goal-state is one implementation of the brief pattern.
+
+No merges required.
+
+---
+
+## [2026-04-16] quality | Contradiction Check — Wave 2
+
+New contradictions noted:
+
+1. **Interactive vs autonomous execution defaults**
+   Artifact: distilled/failures/ambiguity-as-silent-execution.md
+   Severity: nuance
+   Status: Documented. LLM Wiki setup uses "walk me through" for interactive mode; Cowork/Gemini DR/Veo3 default to autonomous. Not a contradiction — different tool designs for different use cases.
+
+2. **Literal vs interpretive execution paradigms**
+   Artifacts: distilled/references/midjourney-v8-calibration.md, distilled/failures/keyword-salad-prompt-collapse.md
+   Severity: context-dependent
+   Status: Noted. V8 is literal; V7 was interpretive. This is a version shift, not a contradiction. Keyword salad worked in V5-V6 but fails in V8. Prompt techniques are not universally transferable across model versions.
+
+No unresolved factual contradictions.
+
+---
+
+## [2026-04-16] taxonomy | Tag Governance — Wave 2
+
+New tags added to taxonomy.md:
+- `prompt-ordering` (prompting) — used by explicit-component-ordering.md
+- `agent-communication` (agentic-systems) — used by file-handoff-state-machine.md
+- `generative-tool` (tooling) — used by midjourney-v8-calibration.md, veo3-production-parameters.md
+- `research-tool` (tooling) — used by gemini-deep-research-parameters.md
+
+All new tags have definitions and at least one artifact using them.
+Total tags: 22 (was 18).
+
+---
+
+## [2026-04-16] ingest | Gemini Deep Research Context File Generation
+
+Source: raw/deep-research/Gemini Deep Research Context File Generation.md
+Mode: deep-research
+Mode confidence: high (research-generated with explicit evidence grading)
+
+Source characteristics:
+- 604 lines, Gemini Deep Research self-generated
+- 49-item source ledger with trust-level classification (Tier 1-4)
+- 12 parameterized prompt templates (Section 6)
+- 7 core prompting principles (PR-01 through PR-07)
+- Meta-instructions for downstream LLMs (Section 7)
+
+Artifacts produced:
+- distilled/failures/outcome-driven-constraint-violation.md (high confidence, NEW)
+- distilled/patterns/explainable-reasoning-trace.md (high confidence, NEW)
+- distilled/patterns/evidence-tiered-source-policy.md (high confidence, NEW)
+
+Existing artifacts augmented:
+- distilled/references/gemini-deep-research-parameters.md — upgraded from medium to high confidence with second source
+- distilled/patterns/uncertainty-and-conflict-protocol.md — added deeper evidence (DeepSearchQA benchmark, epistemic uncertainty distinction)
+
+Dedupe decisions:
+- Core prompting principles (PR-01 through PR-06): overlap with existing gemini-deep-research-parameters.md, prompt-as-architectural-brief.md, uncertainty-and-conflict-protocol.md, ambiguity-as-silent-execution.md. Used as augmentation evidence, not new artifacts.
+- 12 prompt templates (Section 6): high operational value but are specialized instances of existing patterns. Preserved in raw source for reference rather than duplicated as canonical artifacts.
+- PR-07 (KPI-Driven Alignment): genuinely new failure mode → new artifact created
+- PR-03 (ERT): more specific than existing uncertainty protocol → new artifact created
+- Section 8 (Official vs Heuristic): novel meta-practice → new artifact created (evidence-tiered-source-policy.md)
+
+---
+
+## [2026-04-16] quality | Contradiction Check — Wave 3
+
+New contradiction noted:
+
+1. **ERT cost tradeoff**
+   Artifact: distilled/patterns/explainable-reasoning-trace.md
+   Severity: tradeoff
+   Status: Documented. ERT increases token consumption and slows generation. This is an explicit cost/quality tradeoff — use ERT for high-stakes analysis, omit for routine tasks.
+
+No unresolved factual contradictions.
+
+---
+
+## [2026-04-16] quality | Confidence Upgrade
+
+- distilled/references/gemini-deep-research-parameters.md: medium → high (second independent source with 49-item evidence ledger added)
+
+---
+
+## [2026-04-16] quality | First Lint Pass — Full Knowledge Base
+
+Agent: distill-agent (claude-opus-4-6)
+Scope: All 26 canonical artifacts, 9 raw sources, governance files
+
+### Lifecycle / Freshness
+
+- **All 26 artifacts**: lifecycle `current`, created 2026-04-16
+- **No freshness issues**: System is 0 days old. First review-soon window at 90 days (2026-07-15).
+- **Status: PASS**
+
+### Dedupe Keys
+
+- All 26 dedupe_keys verified unique. No collisions.
+- **Status: PASS**
+
+### Tag Compliance
+
+- All 21 unique tags used across artifacts are defined in taxonomy.md.
+- No undefined tags found.
+- **3 unused tags** (entire `model-behavior` domain): `capability-map`, `behavioral-quirk`, `cross-model` — no artifacts use any of these.
+- **Status: PASS** (unused tags are not a violation; domain was created for future use)
+
+### Contradiction Cross-Check
+
+5 artifacts carry non-empty contradictions fields:
+
+| Artifact | Severity | Logged? |
+|----------|----------|---------|
+| distill-first-architecture.md | philosophical-divergence | Wave 1 ✓ |
+| three-layer-knowledge-architecture.md | design-adaptation | Wave 1 (paired with above) ✓ |
+| wiki-vs-rag.md | nuance | Wave 1 ✓ |
+| ambiguity-as-silent-execution.md | nuance | Wave 2 ✓ |
+| explainable-reasoning-trace.md | tradeoff | Wave 3 ✓ |
+
+**Issue found**: Wave 2 contradiction 2 (literal vs interpretive paradigms, keyword-salad / mj-v8) was documented in the log but **missing from artifact frontmatter**. keyword-salad-prompt-collapse.md had `contradictions: []`.
+**Repair**: Added contradiction entry to keyword-salad-prompt-collapse.md (severity: context-dependent, related: midjourney-v8-calibration.md). Total artifacts with contradictions: 6.
+
+### Index Statistics Corrections
+
+Three errors found in index.md statistics table:
+
+| Field | Was | Corrected To | Root Cause |
+|-------|-----|-------------|------------|
+| High confidence | 21 | 20 | Miscounted during wave 3 update |
+| Medium confidence | 5 | 6 | Same — 6 medium artifacts: confidence-decay, rag-cross-doc, claude-cowork-arch, llm-wiki-tools, mj-v8, veo3 |
+| Active contradictions | 4 | 5 | Undercounted; 5 contradictions were logged across 3 waves |
+| Taxonomy tags | 22 | 24 | Original taxonomy had 20 tags (logged as 18); wave 2 added 4 → 24 (logged as 22) |
+
+**Repair**: index.md statistics updated to correct values.
+
+### Evidence Coverage
+
+**Single-source artifacts (1 evidence entry):**
+
+| Artifact | Source | Risk |
+|----------|--------|------|
+| delta-only-continuation.md | veo3.ctx.md | Pattern could be strengthened with examples from other iterative AI tools |
+| file-handoff-state-machine.md | claude-cowork.ctx.md | Pattern is transferable; could cite LangGraph, CrewAI, or AutoGen file-based patterns |
+| claude-cowork-architecture.md | claude-cowork.ctx.md | Reference — single-source expected |
+| llm-wiki-tool-ecosystem.md | karpathy guide | Reference — single-source expected; tools evolve fast |
+| midjourney-v8-calibration.md | midjourney.ctx.md | Reference — single-source expected |
+| veo3-production-parameters.md | veo3.ctx.md | Reference — single-source expected |
+
+4 of 6 single-source artifacts are references (tool-specific snapshots), where single-source is expected. 2 patterns could benefit from corroborating evidence.
+
+**Multi-source leaders (4 sources):**
+- prompt-as-architectural-brief.md — 4 sources
+- explicit-component-ordering.md — 4 sources
+- wiki-vs-rag.md — 4 sources
+
+### Orphan / Cross-Reference Analysis
+
+- Only **6 of 26** artifacts are cross-referenced by other artifacts (via `related_artifact` or body text).
+- **20 artifacts** have zero inbound cross-references.
+- This is normal for a day-0 system but represents an opportunity: adding `see_also` or inline cross-references would strengthen the knowledge graph.
+
+### Unused Domain
+
+- `model-behavior` (3 tags) has zero artifacts. No current raw sources address model capabilities, behavioral quirks, or cross-model comparisons at the concept level.
+- **Recommendation**: Not a problem yet. First artifact in this domain will likely emerge when a model comparison or capability benchmark is ingested.
+
+### Missing Concept Candidates
+
+Topics frequently mentioned across artifacts but lacking their own concept page:
+
+1. **Hallucination / Fabrication mechanism** — referenced in uncertainty-and-conflict-protocol, hallucinated-data-on-missing-evidence, explainable-reasoning-trace, evidence-tiered-source-policy. The autoregressive completion drive is described but never given its own concept artifact.
+2. **Token budget / context window management** — mentioned in file-handoff-state-machine, gemini-deep-research-parameters, goal-state-execution. The tradeoff between context richness and token cost is a cross-cutting concern.
+
+**Recommendation**: Consider creating concept artifacts for these if a future raw source provides primary evidence.
+
+### Summary
+
+| Check | Result |
+|-------|--------|
+| Lifecycle / freshness | ✅ PASS |
+| Dedupe keys unique | ✅ PASS |
+| Tag compliance | ✅ PASS (3 unused tags noted) |
+| Contradictions cross-check | ⚠️ 1 missing entry — REPAIRED |
+| Index statistics | ⚠️ 3 errors — REPAIRED |
+| Evidence coverage | ✅ PASS (2 strengthening candidates noted) |
+| Orphan detection | ℹ️ 20/26 have no inbound refs (day-0 normal) |
+| Missing concepts | ℹ️ 2 candidates identified |
+
+**Repairs applied this pass:**
+1. index.md — corrected confidence (20/6), contradictions (5→6 after repair), tags (24)
+2. keyword-salad-prompt-collapse.md — added missing contradiction entry
+
+**Next recommended actions:**
+1. Seek corroborating sources for delta-only-continuation and file-handoff-state-machine patterns
+2. ~~Add cross-references (`see_also` fields or inline links) to improve knowledge graph density~~ → DONE (see entry below)
+3. Watch for model-behavior domain content in future ingests
+4. Create hallucination/fabrication concept artifact when a primary source arrives
+
+---
+
+## [2026-04-16] structural | Cross-Reference & Schema Overhaul
+
+Agent: distill-agent (claude-opus-4-6)
+Trigger: Lint pass revealed star topology — all artifacts connected only through index.md, zero inter-artifact cross-references. Karpathy's design requires a pre-digested, cross-referenced, synthesized wiki layer.
+
+### Problem
+
+The knowledge graph was a filing cabinet: 26 isolated artifacts linked only through index.md. No artifact referenced any other artifact via structured links. This violates Karpathy's core wiki principle: "The LLM maintains cross-references and keeps everything consistent."
+
+### Changes Made
+
+#### 1. Created CLAUDE.md — Layer 3 Schema Document
+
+New file: `kms/CLAUDE.md`
+
+Purpose: The persistent-memory document that any LLM reads at session start to become a disciplined wiki maintainer. Contains:
+- Wiki mission and design philosophy
+- Directory structure (Layer 1: raw, Layer 2: distilled, Layer 3: schema)
+- Complete frontmatter schema (including new `see_also` field)
+- Cross-reference rules (bidirectional, meaningful, minimum 2 links)
+- Full ingest/query/lint operation workflows
+- Ingest ripple requirement (single source must touch multiple pages)
+- Query compounding loop (good answers filed back as wiki pages)
+- Naming conventions, tag governance, lifecycle rules
+- "What NOT to do" guardrails
+
+#### 2. Added Cross-Reference Mechanism to All 26 Artifacts
+
+New frontmatter field on every artifact:
+```yaml
+see_also:
+  - artifact: distilled/type/related-artifact.md
+    relationship: "One-line explanation of connection"
+```
+
+New body section on every artifact:
+```markdown
+## Related
+- **[Title](relative-path.md)** — relationship explanation
+```
+
+**Coverage**:
+- 26/26 artifacts updated
+- 98 total cross-reference links
+- Average 3.8 links per artifact
+- All links are bidirectional (if A→B, then B→A)
+- Zero orphan artifacts (every artifact has ≥2 inbound links)
+
+**Cross-reference clusters**:
+- Prompting cluster: prompt-as-architectural-brief ↔ explicit-component-ordering ↔ keyword-salad ↔ delta-only ↔ mj-v8 ↔ veo3
+- Knowledge architecture cluster: distill-first ↔ three-layer ↔ canonical-vs-projection ↔ wiki-vs-rag ↔ knowledge-compounding
+- Agent safety cluster: ambiguity-as-silent-execution ↔ uncertainty-protocol ↔ hallucinated-data ↔ outcome-driven ↔ ERT
+- Tool reference cluster: claude-cowork ↔ goal-state ↔ file-handoff; gemini-dr ↔ ERT ↔ evidence-tiered
+- Maintenance cluster: llm-maintenance-cost-shift ↔ confidence-decay ↔ knowledge-compounding
+
+#### 3. Updated Governance Documents
+
+**policies.md** — Added two new sections:
+- "Cross-Reference Rules" (minimum 2 links, bidirectional, meaningful, maintained on ingest/lint)
+- "Ingest Ripple Requirement" (new sources must update existing artifacts, not just create new ones)
+
+**OPERATOR.md** — Updated:
+- Directory tree now includes CLAUDE.md as Layer 3 schema
+- Ingest workflow expanded from 7 to 8 steps; adds "update existing artifacts" and cross-reference steps
+- Added `artifacts_updated` field to envelope schema
+- Quality gates now include Gate 6: Cross-reference
+- Lint pass checklist expanded with cross-reference completeness and bidirectionality checks
+- Query workflow now includes "follow see_also links" and "file back as wiki pages"
+- Frontmatter template updated with `see_also` field
+
+**index.md** — Updated:
+- Added schema pointer and cross-reference note at top
+- Statistics table now includes cross-reference link count (98) and average links per artifact (3.8)
+
+### Design Rationale
+
+| Decision | Why |
+|----------|-----|
+| `see_also` in frontmatter + `## Related` in body | Machine-readable for lint + human-readable for navigation |
+| Bidirectional requirement | Prevents orphans; knowledge graph stays connected |
+| Minimum 2 links | Ensures every artifact participates in the graph |
+| Ingest ripple policy | Matches Karpathy's "single source might touch 10-15 pages" |
+| CLAUDE.md as separate file | Follows Karpathy's Layer 3 pattern (CLAUDE.md for Claude Code, AGENTS.md for Codex) |
+| Query compounding loop | "Good answers filed back as wiki pages" — knowledge grows from exploration, not just ingestion |
+
+---
+
+## [2026-04-16] synthesis | Universal Prompting Principles + Model Comparison Matrix
+
+Agent: distill-agent (claude-opus-4-6)
+Trigger: Operator request to create compiled synthesis artifacts
+
+### Artifacts Produced
+
+1. **distilled/synthesis/universal-prompting-principles.md** (high confidence, synthesis)
+   - Compiled from: 10 atomic artifacts (6 patterns, 4 failures)
+   - Content: 7 universal principles + universal anti-patterns table + modality divergence analysis
+   - This is the most important page in the wiki for downstream wrappers — pre-digested cross-cutting knowledge
+
+2. **distilled/synthesis/model-comparison-matrix.md** (high confidence, synthesis)
+   - Compiled from: 6 atomic artifacts (4 references, 2 patterns)
+   - Content: Overview comparison table, component ordering side-by-side, prompt language comparison, operating environment comparison, calibration parameters, failure mode comparison, task-to-model decision matrix, knowledge gaps
+   - Pre-built comparison — exactly what Karpathy says should exist in a wiki
+
+### Cross-References Added
+
+Bidirectional links added to 14 atomic artifacts (both `see_also` frontmatter and `## Related` body sections):
+
+**Patterns updated (6):**
+- prompt-as-architectural-brief.md → both synthesis pages
+- explicit-component-ordering.md → both synthesis pages
+- uncertainty-and-conflict-protocol.md → universal-prompting-principles
+- explainable-reasoning-trace.md → universal-prompting-principles
+- evidence-tiered-source-policy.md → universal-prompting-principles
+- delta-only-continuation.md → universal-prompting-principles
+
+**Failures updated (4):**
+- keyword-salad-prompt-collapse.md → both synthesis pages
+- ambiguity-as-silent-execution.md → both synthesis pages
+- hallucinated-data-on-missing-evidence.md → universal-prompting-principles
+- outcome-driven-constraint-violation.md → universal-prompting-principles
+
+**References updated (4):**
+- midjourney-v8-calibration.md → both synthesis pages
+- veo3-production-parameters.md → both synthesis pages
+- gemini-deep-research-parameters.md → both synthesis pages
+- claude-cowork-architecture.md → both synthesis pages
+
+### Index Updated
+
+- Added Synthesis section with 2 entries
+- Statistics updated: 28 canonical artifacts (was 26), 22 high confidence (was 20), 2 synthesis artifacts added, cross-reference links updated to 122 (was 98), avg links per artifact 4.4 (was 3.8)
+
+---
+
+## [2026-04-16] structural | Model Profiles + Wiki Reshape
+
+Agent: distill-agent (claude-opus-4-6)
+Trigger: Audit against Karpathy's wiki vision revealed critical gap — wiki was a knowledge inventory (26 atomic fragments), not a compiled wiki. Missing: model profiles, summaries, comparisons, pre-digested synthesis.
+
+### Problem Identified
+
+| Karpathy requires | What we had | Gap |
+|-------------------|-------------|-----|
+| "Pre-digested, cross-referenced, synthesized" | Atomic fragments only | No compiled layer |
+| "Summaries, entity pages, concept pages, comparisons, overview, synthesis" | Only concept + pattern pages | 4 of 6 page types missing |
+| "A single source might touch 10-15 pages" | Ingests created 2-4 artifacts | No ripple to compiled views |
+| "Knowledge compiled once, not re-derived on every query" | To answer "how to prompt MJ V8?" required reading 5+ artifacts | Wrappers would need to reassemble |
+
+Core insight: Atomic artifacts (patterns, concepts, failures, references) are excellent raw knowledge material. But a wiki must also compile that material into reader-ready pages. Karpathy: "What a research assistant would produce if they read everything and organized it for you."
+
+### Artifacts Produced
+
+**4 Model Profiles** (compiled, `distilled/models/`):
+
+| Profile | Lines | Compiled from | Confidence |
+|---------|-------|---------------|-----------|
+| midjourney-v8.md | 299 | 5 atomic artifacts | medium |
+| veo3.md | 386 | 5 atomic artifacts | medium |
+| gemini-deep-research.md | 303 | 7 atomic artifacts | high |
+| claude-cowork.md | 300 | 6 atomic artifacts | medium |
+
+Each model profile is SELF-CONTAINED — a downstream wrapper reads ONE page and knows everything needed to compose prompts for that model. Includes: identity, prompt architecture, component ordering, parameter calibration, anti-patterns, failure modes, operating environments, and a fillable prompt template.
+
+### Taxonomy Updated
+
+Added 2 new artifact types to taxonomy.md:
+- `model-profile` (directory: `models/`, prefix: `model:`) — compiled per-tool prompting profile
+- `synthesis` (directory: `synthesis/`, prefix: `synth:`) — cross-cutting compiled analysis
+
+Added "Atomic vs Compiled" tier distinction: atomic artifacts extract from raw sources, compiled artifacts pre-digest from atomic artifacts.
+
+### Governance Updates
+
+| File | Changes |
+|------|---------|
+| taxonomy.md | Added model-profile and synthesis types; atomic/compiled distinction |
+| policies.md | Artifact types section expanded to two tiers (atomic + compiled); compiled maintenance rule added |
+| OPERATOR.md | Directory tree updated with models/ and synthesis/; reflects 6-type system |
+| CLAUDE.md | Directory tree, frontmatter schema (compiled_from field), atomic vs compiled explanation |
+| index.md | Model Profiles section added; statistics corrected to: 32 artifacts, 23 high, 9 medium, 8 contradictions, 149 links, 4.7 avg |
+
+### Statistics After Reshape
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Total artifacts | 26 | 32 |
+| Atomic artifacts | 26 | 26 |
+| Compiled artifacts | 0 | 6 |
+| High confidence | 20 | 23 |
+| Medium confidence | 6 | 9 |
+| Cross-reference links | 98 | 149 |
+| Avg links/artifact | 3.8 | 4.7 |
+| Active contradictions | 6 | 8 |
+
+### Design Rationale
+
+| Decision | Why |
+|----------|-----|
+| Two-tier system (atomic + compiled) | Atomic for provenance and evidence; compiled for action and readability |
+| Model profiles self-contained | Wrapper reads ONE file, not 5-7. Knowledge compiled once, not re-derived |
+| `compiled_from` field | Audit trail: know exactly which atoms feed each compiled page; know what to update when atoms change |
+| Prompt templates in profiles | Downstream wrappers can fill templates directly — maximum leverage for our prompting purpose |
+| Kept atomic artifacts untouched | Compilation adds a layer ON TOP, doesn't modify the evidence base |

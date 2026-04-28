@@ -20,6 +20,15 @@ evidence:
     claim: "Knowledge should compound, not reset on every query"
 dedupe_key: "concept:knowledge-compounding-mechanism"
 contradictions: []
+see_also:
+  - artifact: distilled/patterns/idea-file-as-knowledge-seed.md
+    relationship: "Idea files are the seed inputs that start the compounding cycle"
+  - artifact: distilled/patterns/three-layer-knowledge-architecture.md
+    relationship: "Architecture that enables systematic compounding across layers"
+  - artifact: distilled/concepts/wiki-vs-rag.md
+    relationship: "Wiki enables compounding; RAG retrieves without accumulating"
+  - artifact: distilled/patterns/llm-maintenance-cost-shift.md
+    relationship: "LLM maintenance makes compounding sustainable at scale"
 supersedes: []
 ---
 
@@ -72,3 +81,10 @@ be evaluated by whether it supports or hinders compounding:
 - Lifecycle management prevents stale knowledge from degrading the whole
 - Dedupe prevents fragmentation that breaks cross-references
 - The controlled taxonomy keeps knowledge findable as the base grows
+
+## Related
+
+- **[Idea File as Knowledge Seed](../patterns/idea-file-as-knowledge-seed.md)** — idea files are the seed inputs that start the compounding cycle
+- **[Three-Layer Knowledge Architecture](../patterns/three-layer-knowledge-architecture.md)** — architecture that enables systematic compounding across layers
+- **[Wiki vs RAG](wiki-vs-rag.md)** — wiki enables compounding; RAG retrieves without accumulating
+- **[LLM Maintenance Cost Shift](../patterns/llm-maintenance-cost-shift.md)** — LLM maintenance makes compounding sustainable at scale

@@ -54,7 +54,9 @@ current --> review-soon --> stale --> archived
 
 ## Artifact Types
 
-Four types, corresponding to subdirectories in `distilled/`:
+Six types in two tiers, corresponding to subdirectories in `distilled/`:
+
+### Atomic Artifacts (extract from raw sources)
 
 | Type | Directory | Purpose |
 |------|-----------|---------|
@@ -62,6 +64,15 @@ Four types, corresponding to subdirectories in `distilled/`:
 | concept | `concepts/` | What something is — architectures, capabilities, models, mental models |
 | failure | `failures/` | What goes wrong and how to repair it — failure modes, anti-patterns |
 | reference | `references/` | Factual claims — benchmarks, comparisons, tool evaluations |
+
+### Compiled Artifacts (pre-digest from atomic artifacts)
+
+| Type | Directory | Purpose |
+|------|-----------|---------|
+| model-profile | `models/` | Everything needed to prompt one specific AI model — compiled from multiple atomic artifacts into one self-contained page |
+| synthesis | `synthesis/` | Cross-cutting analysis — universal principles, comparison matrices, pre-built insights drawn from multiple artifacts |
+
+Compiled artifacts include a `compiled_from` field listing every atomic artifact they synthesize. They must be updated whenever their source atoms change.
 
 ## Source Modes
 
@@ -95,6 +106,32 @@ artifacts_produced:
 notes: <any intake observations>
 ---
 ```
+
+## Cross-Reference Rules
+
+Every artifact must be cross-referenced. Isolated knowledge does not compound.
+
+| Rule | Requirement |
+|------|-------------|
+| Minimum links | Every artifact must have at least 2 `see_also` entries |
+| Bidirectional | If A links to B, B must link back to A |
+| Meaningful | Every link needs a one-line explanation of the relationship |
+| Body section | Every artifact must have a `## Related` section with rendered links |
+| Ingest maintenance | New artifacts must add `see_also` to related existing artifacts |
+| Lint maintenance | Missing cross-references are flagged during lint passes |
+
+## Ingest Ripple Requirement
+
+A single ingest does not just create new artifacts — it ripples across the entire wiki.
+
+When processing a new source, the agent MUST:
+1. Create new artifacts (with full quality gates)
+2. Update existing artifacts with new evidence entries where the source corroborates them
+3. Add `see_also` cross-references on BOTH new and existing related artifacts
+4. Update `## Related` sections in the body of affected artifacts
+5. Record all updates (not just creates) in the envelope and log
+
+If a source ingest creates artifacts but touches nothing else, the agent likely missed connections.
 
 ## Index and Log
 

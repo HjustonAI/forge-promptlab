@@ -17,6 +17,13 @@ evidence:
     claim: "The LLM is rediscovering knowledge from scratch on every question — no accumulation"
 dedupe_key: "fail:rag-cross-document-insight-loss"
 contradictions: []
+see_also:
+  - artifact: distilled/concepts/wiki-vs-rag.md
+    relationship: "This failure is the primary argument for wiki over RAG"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "RAG's chunk isolation prevents the cross-document synthesis that enables compounding"
+  - artifact: distilled/patterns/distill-first-architecture.md
+    relationship: "Distill-first solves this by pre-compiling cross-cutting knowledge"
 supersedes: []
 ---
 
@@ -62,3 +69,9 @@ simple lookup use cases where documents are independent.
 
 Ask your knowledge system: "What contradictions exist in our knowledge base?"
 If it can't answer or gives incomplete results, cross-document insight loss is present.
+
+## Related
+
+- **[Wiki vs RAG](../concepts/wiki-vs-rag.md)** — this failure is the primary argument for wiki over RAG
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — RAG's chunk isolation prevents the cross-document synthesis that enables compounding
+- **[Distill-First Architecture](../patterns/distill-first-architecture.md)** — distill-first solves this by pre-compiling cross-cutting knowledge

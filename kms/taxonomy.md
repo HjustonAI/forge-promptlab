@@ -17,12 +17,19 @@ Top-level knowledge domains. Every artifact belongs to at least one.
 
 ## Artifact Types
 
-| Type | Tag prefix | Definition |
-|------|-----------|------------|
-| pattern | `pat:` | Repeatable technique or workflow |
-| concept | `con:` | Mental model or architectural idea |
-| failure | `fail:` | Failure mode or anti-pattern with repair path |
-| reference | `ref:` | Factual claim backed by specific evidence |
+| Type | Directory | Tag prefix | Definition |
+|------|-----------|-----------|------------|
+| pattern | `patterns/` | `pat:` | Repeatable technique or workflow |
+| concept | `concepts/` | `con:` | Mental model or architectural idea |
+| failure | `failures/` | `fail:` | Failure mode or anti-pattern with repair path |
+| reference | `references/` | `ref:` | Factual claim backed by specific evidence |
+| model-profile | `models/` | `model:` | Compiled per-tool prompting profile — everything needed to prompt one specific model |
+| synthesis | `synthesis/` | `synth:` | Cross-cutting compiled analysis — pre-digested knowledge drawn from multiple artifacts |
+
+### Atomic vs Compiled Artifacts
+
+- **Atomic artifacts** (pattern, concept, failure, reference) extract knowledge from raw sources. One insight per artifact.
+- **Compiled artifacts** (model-profile, synthesis) pre-digest knowledge from multiple atomic artifacts into reader-ready pages. They include a `compiled_from` field listing every atomic artifact they synthesize.
 
 ## Confidence Levels
 
@@ -40,12 +47,14 @@ Tags refine domain classification. Each tag must appear here before use.
 - `prompt-structure` — How to structure prompts (system, user, few-shot, chain-of-thought)
 - `prompt-anti-pattern` — Known ineffective or harmful prompting approaches
 - `prompt-transferability` — Which techniques transfer across model families
+- `prompt-ordering` — How component order in prompts affects execution quality
 
 ### agentic-systems
 - `agent-architecture` — Structural patterns for agent systems
 - `agent-orchestration` — Multi-step and multi-agent coordination
 - `tool-integration` — How agents connect to external tools and APIs
 - `human-agent-contract` — Division of responsibility between human and agent
+- `agent-communication` — How agents exchange information (file handoff, context passing)
 
 ### knowledge-management
 - `knowledge-compounding` — Systems where knowledge accumulates over time
@@ -62,6 +71,8 @@ Tags refine domain classification. Each tag must appear here before use.
 - `search-tool` — Tools for finding information in knowledge bases
 - `authoring-tool` — Tools for creating and maintaining content
 - `integration-pattern` — Patterns for connecting tools together
+- `generative-tool` — Image, video, audio generation tools (Midjourney, Veo3, etc.)
+- `research-tool` — Autonomous research and analysis tools (Gemini Deep Research, etc.)
 
 ### operations
 - `lifecycle-management` — Managing knowledge freshness and retirement

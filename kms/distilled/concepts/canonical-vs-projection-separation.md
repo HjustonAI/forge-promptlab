@@ -17,6 +17,13 @@ evidence:
     claim: "Wrappers adapt to Distill, never the reverse"
 dedupe_key: "concept:canonical-projection-separation"
 contradictions: []
+see_also:
+  - artifact: distilled/patterns/distill-first-architecture.md
+    relationship: "Architecture that enforces canonical-projection separation"
+  - artifact: distilled/patterns/three-layer-knowledge-architecture.md
+    relationship: "Three-layer model where separation between layers is structural"
+  - artifact: distilled/concepts/wiki-vs-rag.md
+    relationship: "Wiki approach maintains canonical layer; RAG blurs the boundary"
 supersedes: []
 ---
 
@@ -57,3 +64,9 @@ one view needs a different shape.
 - `kms/distilled/` is the canonical layer
 - Projections live outside `kms/` entirely, in consumer-specific locations
 - Canonical artifacts carry full metadata; projections carry refs back to canonical
+
+## Related
+
+- **[Distill-First Architecture](../patterns/distill-first-architecture.md)** — architecture that enforces canonical-projection separation
+- **[Three-Layer Knowledge Architecture](../patterns/three-layer-knowledge-architecture.md)** — three-layer model where separation between layers is structural
+- **[Wiki vs RAG](wiki-vs-rag.md)** — wiki approach maintains canonical layer; RAG blurs the boundary

@@ -15,8 +15,18 @@ evidence:
   - source: raw/deep-research/karpathy-llm-wiki-guide.md
     sections: ["Idea Files: A New Format for the Agent Era"]
     claim: "The idea is portable; the code is specific"
+  - source: raw/deep-research/llm-wiki.ctx.md
+    sections: ["Mental Model"]
+    claim: "The idea file already contains the full pattern. Your prompt's job is to provide binding constraints: domain, platform, sources, tooling."
 dedupe_key: "pattern:idea-file-agent-era-sharing"
 contradictions: []
+see_also:
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Idea files are the seed input that starts the compounding cycle"
+  - artifact: distilled/patterns/three-layer-knowledge-architecture.md
+    relationship: "Idea files populate the raw layer of the three-layer architecture"
+  - artifact: distilled/patterns/prompt-as-architectural-brief.md
+    relationship: "Idea files function as architectural briefs for knowledge systems"
 supersedes: []
 ---
 
@@ -59,3 +69,9 @@ idea document that an LLM agent can interpret and instantiate for local context.
 An idea file is not documentation. It is a generative seed — designed to be consumed
 by an agent and grown into a working system. Its value is measured not by completeness
 but by the quality of what agents build from it.
+
+## Related
+
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — idea files are the seed input that starts the compounding cycle
+- **[Three-Layer Knowledge Architecture](three-layer-knowledge-architecture.md)** — idea files populate the raw layer of the three-layer architecture
+- **[Prompt as Architectural Brief](prompt-as-architectural-brief.md)** — idea files function as architectural briefs for knowledge systems

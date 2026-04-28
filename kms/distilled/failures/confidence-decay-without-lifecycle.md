@@ -17,6 +17,13 @@ evidence:
     claim: "Lifecycle states required: current -> review-soon -> stale -> archived"
 dedupe_key: "fail:confidence-decay-no-lifecycle"
 contradictions: []
+see_also:
+  - artifact: distilled/patterns/llm-maintenance-cost-shift.md
+    relationship: "LLM maintenance is the mechanism that prevents confidence decay"
+  - artifact: distilled/patterns/evidence-tiered-source-policy.md
+    relationship: "Source tier assessment helps detect when confidence should decay"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Unmanaged decay undermines the compounding mechanism"
 supersedes: []
 ---
 
@@ -64,3 +71,9 @@ High for long-lived knowledge bases. Low for short-lived project documentation.
 
 Check: can a user of your knowledge system immediately see when a piece of knowledge
 was last verified? If not, confidence decay is likely already happening.
+
+## Related
+
+- **[LLM Maintenance Cost Shift](../patterns/llm-maintenance-cost-shift.md)** — LLM maintenance is the mechanism that prevents confidence decay
+- **[Evidence-Tiered Source Policy](../patterns/evidence-tiered-source-policy.md)** — source tier assessment helps detect when confidence should decay
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — unmanaged decay undermines the compounding mechanism

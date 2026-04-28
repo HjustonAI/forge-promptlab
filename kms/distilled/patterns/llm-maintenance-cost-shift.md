@@ -20,6 +20,13 @@ evidence:
     claim: "Agent responsibilities include maintaining index/log, enforcing quality gates, proposing merges"
 dedupe_key: "pattern:llm-maintenance-cost-shift"
 contradictions: []
+see_also:
+  - artifact: distilled/failures/confidence-decay-without-lifecycle.md
+    relationship: "The failure mode that occurs when LLM maintenance is not governed"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Maintenance cost shift enables sustainable knowledge compounding"
+  - artifact: distilled/patterns/distill-first-architecture.md
+    relationship: "Distill-first architecture depends on LLM-driven maintenance to function"
 supersedes: []
 ---
 
@@ -77,3 +84,9 @@ ones consistently fail.
 Vannevar Bush described the Memex in 1945 — a personal knowledge store with
 associative trails. The vision was right; the missing piece was who does the
 maintenance. LLMs are that missing piece, 80 years later.
+
+## Related
+
+- **[Confidence Decay Without Lifecycle](../failures/confidence-decay-without-lifecycle.md)** — the failure mode that occurs when LLM maintenance is not governed
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — maintenance cost shift enables sustainable knowledge compounding
+- **[Distill-First Architecture](distill-first-architecture.md)** — distill-first architecture depends on LLM-driven maintenance to function

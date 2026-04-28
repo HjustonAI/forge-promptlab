@@ -15,11 +15,23 @@ evidence:
   - source: raw/deep-research/karpathy-llm-wiki-guide.md
     sections: ["Indexing and Logging"]
     claim: "Index and log provide sufficient navigation and audit at moderate scale"
+  - source: raw/deep-research/llm-wiki.ctx.md
+    sections: ["Mental Model", "Leverage Points"]
+    claim: "Full paste of idea file triggers full pattern — agent receives complete spec for all three layers and operations"
 dedupe_key: "pattern:three-layer-raw-wiki-schema"
 contradictions:
   - note: "Forge Heart Wiki modifies this to a two-layer model (raw + distilled) with governance files instead of a separate schema layer. The schema is absorbed into policies and taxonomy rather than being a standalone configuration document."
     severity: design-adaptation
     related_artifact: distilled/patterns/distill-first-architecture.md
+see_also:
+  - artifact: distilled/patterns/distill-first-architecture.md
+    relationship: "Forge Heart's adaptation that modifies the three-layer model"
+  - artifact: distilled/concepts/canonical-vs-projection-separation.md
+    relationship: "Separation principle that the three-layer design enables"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Architecture that enables systematic knowledge compounding"
+  - artifact: distilled/references/llm-wiki-tool-ecosystem.md
+    relationship: "Tools that operate within the three-layer architecture"
 supersedes: []
 ---
 
@@ -78,3 +90,10 @@ This system adapts the three-layer pattern:
 
 The schema layer is decomposed because governance (quality gates, lifecycle rules)
 and vocabulary (taxonomy, tags) serve different purposes and change at different rates.
+
+## Related
+
+- **[Distill-First Architecture](distill-first-architecture.md)** — Forge Heart's adaptation that modifies the three-layer model
+- **[Canonical vs Projection Separation](../concepts/canonical-vs-projection-separation.md)** — separation principle that the three-layer design enables
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — architecture that enables systematic knowledge compounding
+- **[LLM Wiki Tool Ecosystem](../references/llm-wiki-tool-ecosystem.md)** — tools that operate within the three-layer architecture

@@ -11,14 +11,10 @@
             "id": "d87e617df2aa856a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "distilled/patterns/llm-maintenance-cost-shift.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "llm-maintenance-cost-shift"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Podgląd grafu"
             }
           }
         ]
@@ -94,7 +90,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "distilled/patterns/llm-maintenance-cost-shift.md",
+                "file": "OPERATOR.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +100,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Linki zwrotne do llm-maintenance-cost-shift"
+              "title": "Linki zwrotne do OPERATOR"
             }
           },
           {
@@ -113,12 +109,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "distilled/patterns/llm-maintenance-cost-shift.md",
+                "file": "OPERATOR.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Łącza wychodzące od llm-maintenance-cost-shift"
+              "title": "Łącza wychodzące od OPERATOR"
             }
           },
           {
@@ -156,13 +152,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "distilled/patterns/llm-maintenance-cost-shift.md",
+                "file": "OPERATOR.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Konspekt llm-maintenance-cost-shift"
+              "title": "Konspekt OPERATOR"
             }
           }
         ]
@@ -185,11 +181,41 @@
   },
   "active": "d87e617df2aa856a",
   "lastOpenFiles": [
-    "distilled/patterns/idea-file-as-knowledge-seed.md",
-    "distilled/patterns/distill-first-architecture.md",
+    "CLAUDE.md",
+    "raw/deep-research/claude-cowork.ctx.md",
+    "raw/deep-research/llm-wiki.ctx.envelope.md",
+    "raw/deep-research/karpathy-llm-wiki-guide.md",
+    "raw/deep-research/Gemini Deep Research Context File Generation.envelope.md",
+    "raw/deep-research/claude-cowork.ctx.envelope.md",
+    "distilled/synthesis/universal-prompting-principles.md",
+    "distilled/patterns/three-layer-knowledge-architecture.md",
+    "log.md.tmp.58040.1776353341405",
+    "OPERATOR.md.tmp.58040.1776353307308",
+    "policies.md.tmp.58040.1776353301347",
+    "CLAUDE.md.tmp.58040.1776353291994",
+    "CLAUDE.md.tmp.58040.1776353278460",
+    "index.md.tmp.58040.1776353270566",
+    "index.md.tmp.58040.1776353243399",
+    "log.md.tmp.58040.1776352705539",
+    "distilled/references/claude-cowork-architecture.md.tmp.58040.1776352675091",
+    "distilled/references/gemini-deep-research-parameters.md.tmp.58040.1776352669332",
+    "distilled/synthesis/model-comparison-matrix.md",
+    "distilled/models/claude-cowork.md",
+    "distilled/models/gemini-deep-research.md",
+    "distilled/models/veo3.md",
+    "distilled/models/midjourney-v8.md",
+    "OPERATOR.md",
+    "distilled/failures/keyword-salad-prompt-collapse.md",
+    "distilled/failures/confidence-decay-without-lifecycle.md",
+    "taxonomy.md",
+    "policies.md",
+    "log.md",
+    "distilled/patterns/evidence-tiered-source-policy.md",
+    "distilled/patterns/explainable-reasoning-trace.md",
+    "distilled/failures/outcome-driven-constraint-violation.md",
+    "raw/deep-research/Gemini Deep Research Context File Generation.md",
     "index.md",
-    "raw/field-notes/rag-vs-compiled-knowledge-field-observation.envelope.md",
-    "raw/field-notes/rag-vs-compiled-knowledge-field-observation.md",
-    "distilled/failures/rag-cross-document-insight-loss.md"
+    "distilled/references/claude-cowork-architecture.md",
+    "distilled/patterns/delta-only-continuation.md"
   ]
 }

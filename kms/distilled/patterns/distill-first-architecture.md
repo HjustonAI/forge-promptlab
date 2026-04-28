@@ -20,6 +20,15 @@ contradictions:
   - note: "Karpathy's design treats the wiki layer as both truth and consumer surface. Forge Heart Wiki explicitly separates these concerns — canonical knowledge must not be shaped by consumer convenience."
     severity: philosophical-divergence
     related_artifact: distilled/patterns/three-layer-knowledge-architecture.md
+see_also:
+  - artifact: distilled/patterns/three-layer-knowledge-architecture.md
+    relationship: "Distill-first adapts the three-layer model by separating canonical from projection"
+  - artifact: distilled/concepts/canonical-vs-projection-separation.md
+    relationship: "The core concept that distill-first architecture enforces"
+  - artifact: distilled/concepts/wiki-vs-rag.md
+    relationship: "Compiled knowledge approach that distill-first serves"
+  - artifact: distilled/patterns/evidence-tiered-source-policy.md
+    relationship: "Source trust policy that feeds into distill-first quality gates"
 supersedes: []
 ---
 
@@ -61,3 +70,10 @@ Karpathy's wiki layer serves as both truth store and consumption surface. This w
 for a single-user personal wiki. For multi-consumer systems (like Forge Heart Wiki,
 which may feed into prompt systems, dashboards, and agent tools), explicit separation
 is necessary to prevent canonical drift.
+
+## Related
+
+- **[Three-Layer Knowledge Architecture](three-layer-knowledge-architecture.md)** — distill-first adapts the three-layer model by separating canonical from projection
+- **[Canonical vs Projection Separation](../concepts/canonical-vs-projection-separation.md)** — the core concept that distill-first architecture enforces
+- **[Wiki vs RAG](../concepts/wiki-vs-rag.md)** — compiled knowledge approach that distill-first serves
+- **[Evidence-Tiered Source Policy](evidence-tiered-source-policy.md)** — source trust policy that feeds into distill-first quality gates

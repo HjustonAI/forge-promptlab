@@ -18,11 +18,23 @@ evidence:
   - source: raw/field-notes/rag-vs-compiled-knowledge-field-observation.md
     sections: ["Observation 1"]
     claim: "RAG-only systems miss insights requiring synthesis across 3+ documents"
+  - source: raw/deep-research/llm-wiki.ctx.md
+    sections: ["Leverage Points"]
+    claim: "Full paste triggers full pattern — index.md format, operation definitions, workflow steps all become default behavior without re-explanation"
 dedupe_key: "concept:wiki-vs-rag-knowledge-approach"
 contradictions:
   - note: "RAG has advantages wiki lacks: handles unstructured queries over large corpora where pre-compilation is infeasible. This artifact captures Karpathy's argument for wiki superiority at moderate scale but does not claim RAG is universally inferior."
     severity: nuance
     related_artifact: null
+see_also:
+  - artifact: distilled/failures/rag-cross-document-insight-loss.md
+    relationship: "Documents the specific failure mode that makes RAG inferior for cross-cutting synthesis"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Wiki enables compounding that RAG cannot achieve"
+  - artifact: distilled/patterns/distill-first-architecture.md
+    relationship: "Distill-first is the architecture that implements wiki-over-RAG"
+  - artifact: distilled/concepts/canonical-vs-projection-separation.md
+    relationship: "Wiki maintains clean canonical layer; RAG collapses it with retrieval"
 supersedes: []
 ---
 
@@ -70,3 +82,10 @@ Karpathy reports that index.md-based navigation works well at moderate scale
 (~100 sources, ~hundreds of pages). Beyond that, search tools like qmd may be
 needed. The wiki approach is best suited for curated, domain-specific knowledge
 bases — not arbitrary document dumps.
+
+## Related
+
+- **[RAG Cross-Document Insight Loss](../failures/rag-cross-document-insight-loss.md)** — documents the specific failure mode that makes RAG inferior for cross-cutting synthesis
+- **[Knowledge Compounding](knowledge-compounding.md)** — wiki enables compounding that RAG cannot achieve
+- **[Distill-First Architecture](../patterns/distill-first-architecture.md)** — distill-first is the architecture that implements wiki-over-RAG
+- **[Canonical vs Projection Separation](canonical-vs-projection-separation.md)** — wiki maintains clean canonical layer; RAG collapses it with retrieval

@@ -14,6 +14,13 @@ evidence:
     claim: "Specific tools recommended for markdown-based knowledge systems"
 dedupe_key: "ref:llm-wiki-tool-ecosystem-2026"
 contradictions: []
+see_also:
+  - artifact: distilled/patterns/three-layer-knowledge-architecture.md
+    relationship: "Tools in this ecosystem operate within the three-layer architecture"
+  - artifact: distilled/concepts/knowledge-compounding.md
+    relationship: "Tool ecosystem enables the compounding loop (ingest → query → file back)"
+  - artifact: distilled/patterns/idea-file-as-knowledge-seed.md
+    relationship: "Idea files are the primary input format these tools process"
 supersedes: []
 ---
 
@@ -60,3 +67,9 @@ to a hotkey. This downloads images locally so the LLM can reference them directl
 Current LLMs cannot natively read markdown with inline images in one pass.
 Workaround: LLM reads text first, then views referenced images separately.
 This limitation is likely temporary and should be re-evaluated periodically.
+
+## Related
+
+- **[Three-Layer Knowledge Architecture](../patterns/three-layer-knowledge-architecture.md)** — tools in this ecosystem operate within the three-layer architecture
+- **[Knowledge Compounding](../concepts/knowledge-compounding.md)** — tool ecosystem enables the compounding loop (ingest → query → file back)
+- **[Idea File as Knowledge Seed](../patterns/idea-file-as-knowledge-seed.md)** — idea files are the primary input format these tools process
