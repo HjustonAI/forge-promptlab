@@ -23,6 +23,7 @@ echo "Using embedding model: $QMD_EMBED_MODEL"
 
 # 3. Add collections (per-type scoping for the retrieval contract)
 declare -a COLLECTIONS=(
+  # v2 target structure
   "compiled/playbooks:playbooks"
   "compiled/profiles:profiles"
   "compiled/syntheses:syntheses"
@@ -32,6 +33,11 @@ declare -a COLLECTIONS=(
   "distilled/mechanisms:mechanisms"
   "distilled/exemplars:exemplars"
   "distilled/concepts:concepts"
+  # v1 legacy directories — will be empty after Phase C migration but indexed during transition
+  "distilled/models:models"
+  "distilled/references:references"
+  "distilled/synthesis:synthesis-legacy"
+  # source layer
   "raw:raw"
 )
 

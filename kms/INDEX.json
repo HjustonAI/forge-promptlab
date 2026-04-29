@@ -1,0 +1,2065 @@
+{
+  "generated": "2026-04-29",
+  "counts": {
+    "total": 33,
+    "by_type": {
+      "concept": 3,
+      "failure": 6,
+      "model-profile": 4,
+      "pattern": 13,
+      "reference": 5,
+      "synthesis": 2
+    },
+    "v2_complete": 1,
+    "v1_remaining": 32,
+    "orphans": 0,
+    "dedupe_collisions": 0
+  },
+  "artifacts": [
+    {
+      "path": "distilled/concepts/canonical-vs-projection-separation.md",
+      "type": "concept",
+      "title": "Canonical vs Projection Separation",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "concept:canonical-projection-separation",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-architecture",
+        "knowledge-quality"
+      ],
+      "language": null,
+      "inbound_count": 3,
+      "edges": [
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": null,
+          "relationship": "Architecture that enforces canonical-projection separation",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": null,
+          "relationship": "Three-layer model where separation between layers is structural",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/wiki-vs-rag.md",
+          "relation": null,
+          "relationship": "Wiki approach maintains canonical layer; RAG blurs the boundary",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/distill-first-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/three-layer-knowledge-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/wiki-vs-rag.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/concepts/knowledge-compounding.md",
+      "type": "concept",
+      "title": "Knowledge Compounding",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "concept:knowledge-compounding-mechanism",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-compounding",
+        "knowledge-architecture"
+      ],
+      "language": null,
+      "inbound_count": 8,
+      "edges": [
+        {
+          "to": "distilled/patterns/idea-file-as-knowledge-seed.md",
+          "relation": null,
+          "relationship": "Idea files are the seed inputs that start the compounding cycle",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": null,
+          "relationship": "Architecture that enables systematic compounding across layers",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/wiki-vs-rag.md",
+          "relation": null,
+          "relationship": "Wiki enables compounding; RAG retrieves without accumulating",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/llm-maintenance-cost-shift.md",
+          "relation": null,
+          "relationship": "LLM maintenance makes compounding sustainable at scale",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/ingest-pipeline.md",
+          "relation": "enabled-by",
+          "relationship": null,
+          "note": "The ingest pipeline's ripple step is the operational mechanism that produces compounding"
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/idea-file-as-knowledge-seed.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/three-layer-knowledge-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/wiki-vs-rag.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/llm-maintenance-cost-shift.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/concepts/wiki-vs-rag.md",
+      "type": "concept",
+      "title": "Wiki vs RAG for Knowledge Systems",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "concept:wiki-vs-rag-knowledge-approach",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-architecture",
+        "knowledge-compounding",
+        "ingest-pipeline"
+      ],
+      "language": null,
+      "inbound_count": 4,
+      "edges": [
+        {
+          "to": "distilled/failures/rag-cross-document-insight-loss.md",
+          "relation": null,
+          "relationship": "Documents the specific failure mode that makes RAG inferior for cross-cutting synthesis",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Wiki enables compounding that RAG cannot achieve",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": null,
+          "relationship": "Distill-first is the architecture that implements wiki-over-RAG",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/canonical-vs-projection-separation.md",
+          "relation": null,
+          "relationship": "Wiki maintains clean canonical layer; RAG collapses it with retrieval",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/rag-cross-document-insight-loss.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/distill-first-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/canonical-vs-projection-separation.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/ambiguity-as-silent-execution.md",
+      "type": "failure",
+      "title": "Ambiguity as Silent Execution",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:ambiguity-silent-execution",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "agentic-systems",
+        "prompting"
+      ],
+      "tags": [
+        "agent-architecture",
+        "prompt-anti-pattern",
+        "human-agent-contract"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "The protocol that prevents this failure by requiring explicit uncertainty handling",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/goal-state-execution.md",
+          "relation": null,
+          "relationship": "Clear goal-states reduce the ambiguity space where silent execution occurs",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+          "relation": null,
+          "relationship": "Related failure — silent execution often produces hallucinated outputs",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/outcome-driven-constraint-violation.md",
+          "relation": null,
+          "relationship": "Both failures show agents prioritizing completion over correctness",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this failure into the universal anti-patterns table",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix showing ambiguity-as-silent-execution impact across all four tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/goal-state-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/hallucinated-data-on-missing-evidence.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/outcome-driven-constraint-violation.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/confidence-decay-without-lifecycle.md",
+      "type": "failure",
+      "title": "Confidence Decay Without Lifecycle Management",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:confidence-decay-no-lifecycle",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management",
+        "operations"
+      ],
+      "tags": [
+        "knowledge-quality",
+        "lifecycle-management"
+      ],
+      "language": null,
+      "inbound_count": 2,
+      "edges": [
+        {
+          "to": "distilled/patterns/llm-maintenance-cost-shift.md",
+          "relation": null,
+          "relationship": "LLM maintenance is the mechanism that prevents confidence decay",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Source tier assessment helps detect when confidence should decay",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Unmanaged decay undermines the compounding mechanism",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/llm-maintenance-cost-shift.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+      "type": "failure",
+      "title": "Hallucinated Data on Missing Evidence",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:hallucinated-data-missing-evidence",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "agentic-systems",
+        "prompting"
+      ],
+      "tags": [
+        "knowledge-quality",
+        "prompt-anti-pattern",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 5,
+      "edges": [
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "Protocol that prevents hallucination by requiring 'Data Unavailable' declarations",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/explainable-reasoning-trace.md",
+          "relation": null,
+          "relationship": "ERT forces explicit reasoning that exposes gaps before hallucination occurs",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "Silent execution on ambiguity is a trigger for hallucinated outputs",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Tier enforcement prevents low-quality sources from masking evidence gaps",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this failure into the universal anti-patterns table",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/explainable-reasoning-trace.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/keyword-salad-prompt-collapse.md",
+      "type": "failure",
+      "title": "Keyword Salad Prompt Collapse",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:keyword-salad-prompt-collapse",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting"
+      ],
+      "tags": [
+        "prompt-anti-pattern",
+        "prompt-structure"
+      ],
+      "language": null,
+      "inbound_count": 4,
+      "edges": [
+        {
+          "to": "distilled/patterns/explicit-component-ordering.md",
+          "relation": null,
+          "relationship": "The structural ordering that replaces keyword lists",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/prompt-as-architectural-brief.md",
+          "relation": null,
+          "relationship": "Architectural briefs are the direct remedy for keyword salad",
+          "note": null
+        },
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "Platform where keyword salad is most visibly harmful",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Platform that parses prompts syntactically, making keywords counterproductive",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Compiled model profile that documents this failure mode in Veo3 context",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this failure into the universal anti-patterns table",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix showing keyword salad impact across all four tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/explicit-component-ordering.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/prompt-as-architectural-brief.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/outcome-driven-constraint-violation.md",
+      "type": "failure",
+      "title": "Outcome-Driven Constraint Violation",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:outcome-driven-constraint-violation",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "agentic-systems",
+        "operations"
+      ],
+      "tags": [
+        "agent-architecture",
+        "human-agent-contract",
+        "failure-repair"
+      ],
+      "language": null,
+      "inbound_count": 1,
+      "edges": [
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "Related failure — both show agents prioritizing task completion over safety",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+          "relation": null,
+          "relationship": "Constraint violation can manifest as fabricated data to meet outcome targets",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "Protocol that creates explicit checkpoints before constraint violation occurs",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this failure into the universal anti-patterns table",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/hallucinated-data-on-missing-evidence.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/failures/rag-cross-document-insight-loss.md",
+      "type": "failure",
+      "title": "RAG Cross-Document Insight Loss",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "fail:rag-cross-document-insight-loss",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-quality",
+        "ingest-pipeline"
+      ],
+      "language": null,
+      "inbound_count": 2,
+      "edges": [
+        {
+          "to": "distilled/concepts/wiki-vs-rag.md",
+          "relation": null,
+          "relationship": "This failure is the primary argument for wiki over RAG",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "RAG's chunk isolation prevents the cross-document synthesis that enables compounding",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": null,
+          "relationship": "Distill-first solves this by pre-compiling cross-cutting knowledge",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/ingest-pipeline.md",
+          "relation": "mitigated-by",
+          "relationship": null,
+          "note": "Ingest pipeline's ripple step actively prevents the cross-document silo failure"
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/concepts/wiki-vs-rag.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/distill-first-architecture.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/models/claude-cowork.md",
+      "type": "model-profile",
+      "title": "Claude Cowork — Prompting Profile",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "model:claude-cowork-prompting-profile",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems",
+        "tooling"
+      ],
+      "tags": [
+        "agent-architecture",
+        "agent-orchestration",
+        "prompt-structure",
+        "agent-communication"
+      ],
+      "language": null,
+      "inbound_count": 1,
+      "edges": [
+        {
+          "to": "distilled/references/claude-cowork-architecture.md",
+          "relation": null,
+          "relationship": "Atomic reference data compiled into this profile",
+          "note": null
+        },
+        {
+          "to": "distilled/models/gemini-deep-research.md",
+          "relation": null,
+          "relationship": "Companion agent platform profile — both are autonomous execution systems",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Cross-model principles that apply to Cowork",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: model-profile (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/claude-cowork-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/gemini-deep-research.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/models/gemini-deep-research.md",
+      "type": "model-profile",
+      "title": "Gemini Deep Research — Prompting Profile",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "model:gemini-deep-research-prompting-profile",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems",
+        "tooling"
+      ],
+      "tags": [
+        "research-tool",
+        "agent-architecture",
+        "prompt-structure"
+      ],
+      "language": null,
+      "inbound_count": 1,
+      "edges": [
+        {
+          "to": "distilled/references/gemini-deep-research-parameters.md",
+          "relation": null,
+          "relationship": "Atomic reference data compiled into this profile",
+          "note": null
+        },
+        {
+          "to": "distilled/models/claude-cowork.md",
+          "relation": null,
+          "relationship": "Companion agent platform profile — both are autonomous execution systems",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Cross-model principles that apply to Gemini DR",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: model-profile (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/gemini-deep-research-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/claude-cowork.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/models/midjourney-v8.md",
+      "type": "model-profile",
+      "title": "Midjourney V8 — Prompting Profile",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "model:midjourney-v8-prompting-profile",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "tooling"
+      ],
+      "tags": [
+        "generative-tool",
+        "prompt-structure",
+        "prompt-ordering"
+      ],
+      "language": null,
+      "inbound_count": 1,
+      "edges": [
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "Atomic reference data compiled into this profile",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Companion generative model profile — shared principles, different modality",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Cross-model principles that apply to MJ V8",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: model-profile (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/models/veo3.md",
+      "type": "model-profile",
+      "title": "Veo3 — Prompting Profile",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "model:veo3-prompting-profile",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "tooling"
+      ],
+      "tags": [
+        "generative-tool",
+        "prompt-structure",
+        "prompt-ordering"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Atomic reference data compiled into this profile",
+          "note": null
+        },
+        {
+          "to": "distilled/models/midjourney-v8.md",
+          "relation": null,
+          "relationship": "Companion generative model profile — shared principles, different modality",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Cross-model principles that apply to Veo3",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: model-profile (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/midjourney-v8.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/delta-only-continuation.md",
+      "type": "pattern",
+      "title": "Delta-Only Continuation",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:delta-only-continuation",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting"
+      ],
+      "tags": [
+        "prompt-structure",
+        "prompt-transferability"
+      ],
+      "language": null,
+      "inbound_count": 2,
+      "edges": [
+        {
+          "to": "distilled/patterns/prompt-as-architectural-brief.md",
+          "relation": null,
+          "relationship": "The initial brief that delta-only continuations extend",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/explicit-component-ordering.md",
+          "relation": null,
+          "relationship": "Ordering discipline that applies to continuation prompts",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Platform where delta-only continuation was first observed",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Compiled model profile that documents this pattern as architecturally required for Veo3",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles delta-only continuation into universal principles",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/prompt-as-architectural-brief.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/explicit-component-ordering.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/distill-first-architecture.md",
+      "type": "pattern",
+      "title": "Distill-First Architecture",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:distill-first-over-projection-first",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-architecture",
+        "knowledge-quality",
+        "ingest-pipeline"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": null,
+          "relationship": "Distill-first adapts the three-layer model by separating canonical from projection",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/canonical-vs-projection-separation.md",
+          "relation": null,
+          "relationship": "The core concept that distill-first architecture enforces",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/wiki-vs-rag.md",
+          "relation": null,
+          "relationship": "Compiled knowledge approach that distill-first serves",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Source trust policy that feeds into distill-first quality gates",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/ingest-pipeline.md",
+          "relation": "implemented-by",
+          "relationship": null,
+          "note": "The ingest pipeline is the operational write path that enforces this architecture"
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/three-layer-knowledge-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/canonical-vs-projection-separation.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/wiki-vs-rag.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/evidence-tiered-source-policy.md",
+      "type": "pattern",
+      "title": "Evidence-Tiered Source Policy",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:evidence-tiered-source-policy",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-quality",
+        "prompt-structure",
+        "research-tool"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/patterns/explainable-reasoning-trace.md",
+          "relation": null,
+          "relationship": "ERT applies strongest when source tiers indicate high-stakes analysis",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+          "relation": null,
+          "relationship": "Source tier enforcement prevents the conditions that cause hallucination",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/confidence-decay-without-lifecycle.md",
+          "relation": null,
+          "relationship": "Tier classification helps determine when confidence should decay",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "Tier differences between conflicting sources inform conflict resolution",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles source tiering into universal principles",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/explainable-reasoning-trace.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/hallucinated-data-on-missing-evidence.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/confidence-decay-without-lifecycle.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/explainable-reasoning-trace.md",
+      "type": "pattern",
+      "title": "Explainable Reasoning Trace (ERT)",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:explainable-reasoning-trace-ert",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems"
+      ],
+      "tags": [
+        "prompt-structure",
+        "knowledge-quality",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 4,
+      "edges": [
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "Complementary protocol — ERT forces reasoning, uncertainty protocol handles missing data",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+          "relation": null,
+          "relationship": "ERT reduces hallucination by forcing explicit reasoning before conclusions",
+          "note": null
+        },
+        {
+          "to": "distilled/references/gemini-deep-research-parameters.md",
+          "relation": null,
+          "relationship": "Platform where ERT is most impactful (high-stakes research synthesis)",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Source tiers determine when ERT is worth the token cost tradeoff",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles ERT into universal principles",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/hallucinated-data-on-missing-evidence.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/gemini-deep-research-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/explicit-component-ordering.md",
+      "type": "pattern",
+      "title": "Explicit Component Ordering",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:explicit-component-ordering-prompts",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting"
+      ],
+      "tags": [
+        "prompt-structure",
+        "prompt-ordering"
+      ],
+      "language": null,
+      "inbound_count": 5,
+      "edges": [
+        {
+          "to": "distilled/patterns/prompt-as-architectural-brief.md",
+          "relation": null,
+          "relationship": "The architectural pattern these ordering rules implement",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/keyword-salad-prompt-collapse.md",
+          "relation": null,
+          "relationship": "Failure that occurs when ordering is absent",
+          "note": null
+        },
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "Tool-specific ordering rules for Midjourney V8",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Tool-specific ordering rules for Veo3",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Compiled model profile that applies this ordering pattern to Veo3",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this ordering pattern into universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix showing ordering differences across all four tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/prompt-as-architectural-brief.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/keyword-salad-prompt-collapse.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/file-handoff-state-machine.md",
+      "type": "pattern",
+      "title": "File Handoff State Machine",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:file-handoff-inter-agent-communication",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "agentic-systems"
+      ],
+      "tags": [
+        "agent-communication",
+        "agent-orchestration",
+        "tool-integration"
+      ],
+      "language": null,
+      "inbound_count": 2,
+      "edges": [
+        {
+          "to": "distilled/patterns/goal-state-execution.md",
+          "relation": null,
+          "relationship": "Goal-state defines what agents pursue; file handoff coordinates between them",
+          "note": null
+        },
+        {
+          "to": "distilled/references/claude-cowork-architecture.md",
+          "relation": null,
+          "relationship": "Platform architecture where file handoff pattern operates",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "File handoff creates audit trail that makes silent execution visible",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/goal-state-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/claude-cowork-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/goal-state-execution.md",
+      "type": "pattern",
+      "title": "Goal-State Execution (Done Framework)",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:goal-state-execution-done-framework",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "agentic-systems",
+        "prompting"
+      ],
+      "tags": [
+        "agent-orchestration",
+        "prompt-structure",
+        "human-agent-contract"
+      ],
+      "language": null,
+      "inbound_count": 4,
+      "edges": [
+        {
+          "to": "distilled/patterns/prompt-as-architectural-brief.md",
+          "relation": null,
+          "relationship": "Brief defines prompt structure, goal-state defines terminal condition",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/file-handoff-state-machine.md",
+          "relation": null,
+          "relationship": "Inter-agent coordination pattern used alongside goal-state execution",
+          "note": null
+        },
+        {
+          "to": "distilled/references/claude-cowork-architecture.md",
+          "relation": null,
+          "relationship": "Platform where goal-state execution (Done Framework) originates",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "Failure mode that clear goal-states help prevent",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/prompt-as-architectural-brief.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/file-handoff-state-machine.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/claude-cowork-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/idea-file-as-knowledge-seed.md",
+      "type": "pattern",
+      "title": "Idea File as Knowledge Seed",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:idea-file-agent-era-sharing",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management",
+        "agentic-systems"
+      ],
+      "tags": [
+        "knowledge-architecture",
+        "agent-architecture",
+        "human-agent-contract"
+      ],
+      "language": null,
+      "inbound_count": 3,
+      "edges": [
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Idea files are the seed input that starts the compounding cycle",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": null,
+          "relationship": "Idea files populate the raw layer of the three-layer architecture",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/prompt-as-architectural-brief.md",
+          "relation": null,
+          "relationship": "Idea files function as architectural briefs for knowledge systems",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/ingest-pipeline.md",
+          "relation": "composed-with",
+          "relationship": null,
+          "note": "Idea-file mode is one of nine source-mode pipelines invoked by ingest"
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/three-layer-knowledge-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/prompt-as-architectural-brief.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/ingest-pipeline.md",
+      "type": "pattern",
+      "title": "Ingest Pipeline — Raw Source to Typed Canonical Artifact",
+      "tldr": "Transform a heterogeneous raw source (paper, system prompt, deep research, idea file, tool doc, workflow JSON) into atomic + compiled wiki artifacts via a 9-step ripple workflow: envelope → read → qmd-search neighbors → dedupe → atomic creation → ripple existing artifacts → recompile profiles/playbooks → index/log update → INDEX.json regen.",
+      "goal": "ingest a raw source into a typed canonical knowledge graph",
+      "dedupe_key": "pattern:ingest-pipeline-raw-to-canonical",
+      "lifecycle": "current",
+      "provenance_tier": "personal-field",
+      "confidence": "high",
+      "modality": [
+        "agentic"
+      ],
+      "tools": [
+        "qmd",
+        "claude-code"
+      ],
+      "domains": [
+        "knowledge-management",
+        "agentic-systems"
+      ],
+      "tags": [
+        "ingest-pipeline",
+        "knowledge-architecture",
+        "knowledge-compounding",
+        "knowledge-quality",
+        "ingestion-ripple"
+      ],
+      "language": "en",
+      "inbound_count": 5,
+      "edges": [
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": "implements",
+          "relationship": null,
+          "note": "Ingest is the write path that enforces the distill-first principle"
+        },
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": "requires",
+          "relationship": null,
+          "note": "Pipeline depends on the raw → distilled → compiled separation"
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": "enables",
+          "relationship": null,
+          "note": "Compounding is the OUTCOME of disciplined ingest with ripple updates"
+        },
+        {
+          "to": "distilled/failures/rag-cross-document-insight-loss.md",
+          "relation": "mitigates",
+          "relationship": null,
+          "note": "Ripple step prevents cross-document insights from being lost across silos"
+        },
+        {
+          "to": "distilled/patterns/idea-file-as-knowledge-seed.md",
+          "relation": "composes-with",
+          "relationship": null,
+          "note": "Idea-file mode is one of nine source-mode pipelines"
+        }
+      ],
+      "_issues": [
+        "V2-TLDR-OVERSIZE: 342 chars (max 280)"
+      ]
+    },
+    {
+      "path": "distilled/patterns/llm-maintenance-cost-shift.md",
+      "type": "pattern",
+      "title": "LLM Maintenance Cost Shift",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:llm-maintenance-cost-shift",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management",
+        "agentic-systems"
+      ],
+      "tags": [
+        "human-agent-contract",
+        "maintenance-pattern",
+        "lifecycle-management"
+      ],
+      "language": null,
+      "inbound_count": 2,
+      "edges": [
+        {
+          "to": "distilled/failures/confidence-decay-without-lifecycle.md",
+          "relation": null,
+          "relationship": "The failure mode that occurs when LLM maintenance is not governed",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Maintenance cost shift enables sustainable knowledge compounding",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": null,
+          "relationship": "Distill-first architecture depends on LLM-driven maintenance to function",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/confidence-decay-without-lifecycle.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/distill-first-architecture.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/prompt-as-architectural-brief.md",
+      "type": "pattern",
+      "title": "Prompt as Architectural Brief",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:prompt-as-architectural-brief",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems"
+      ],
+      "tags": [
+        "prompt-structure",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 5,
+      "edges": [
+        {
+          "to": "distilled/patterns/explicit-component-ordering.md",
+          "relation": null,
+          "relationship": "Ordering rules that implement the architectural brief structure",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/goal-state-execution.md",
+          "relation": null,
+          "relationship": "Complementary pattern — brief defines structure, goal-state defines terminal condition",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/delta-only-continuation.md",
+          "relation": null,
+          "relationship": "Continuation technique that extends an initial architectural brief",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/keyword-salad-prompt-collapse.md",
+          "relation": null,
+          "relationship": "The failure mode that architectural briefs prevent",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Compiled model profile that applies this pattern to Veo3 prompting",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this pattern with others into cross-cutting universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix showing how this pattern manifests per tool",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/explicit-component-ordering.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/goal-state-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/delta-only-continuation.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/keyword-salad-prompt-collapse.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/three-layer-knowledge-architecture.md",
+      "type": "pattern",
+      "title": "Three-Layer Knowledge Architecture",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:three-layer-raw-wiki-schema",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "knowledge-management"
+      ],
+      "tags": [
+        "knowledge-architecture",
+        "ingest-pipeline"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/patterns/distill-first-architecture.md",
+          "relation": null,
+          "relationship": "Forge Heart's adaptation that modifies the three-layer model",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/canonical-vs-projection-separation.md",
+          "relation": null,
+          "relationship": "Separation principle that the three-layer design enables",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Architecture that enables systematic knowledge compounding",
+          "note": null
+        },
+        {
+          "to": "distilled/references/llm-wiki-tool-ecosystem.md",
+          "relation": null,
+          "relationship": "Tools that operate within the three-layer architecture",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/ingest-pipeline.md",
+          "relation": "required-by",
+          "relationship": null,
+          "note": "Ingest pipeline depends on this layer separation to function"
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/distill-first-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/canonical-vs-projection-separation.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/llm-wiki-tool-ecosystem.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+      "type": "pattern",
+      "title": "Uncertainty and Conflict Protocol",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "pattern:uncertainty-conflict-protocol",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems"
+      ],
+      "tags": [
+        "prompt-structure",
+        "knowledge-quality",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/failures/hallucinated-data-on-missing-evidence.md",
+          "relation": null,
+          "relationship": "The failure mode this protocol directly prevents",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/explainable-reasoning-trace.md",
+          "relation": null,
+          "relationship": "Complementary technique — ERT forces reasoning, this protocol handles uncertainty",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "Related failure where agents execute on ambiguity instead of flagging conflict",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Source tiers inform how conflicts between sources should be resolved",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Synthesis page that compiles this protocol into universal principles",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: tldr (atomic artifacts require tldr ≤ 280 chars)",
+        "V2-MISSING: goal (atomic artifacts require goal field)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/hallucinated-data-on-missing-evidence.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/explainable-reasoning-trace.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/references/claude-cowork-architecture.md",
+      "type": "reference",
+      "title": "Claude Cowork Architecture Reference",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "ref:claude-cowork-architecture-2026",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "tooling",
+        "agentic-systems"
+      ],
+      "tags": [
+        "agent-architecture",
+        "agent-orchestration",
+        "tool-integration"
+      ],
+      "language": null,
+      "inbound_count": 5,
+      "edges": [
+        {
+          "to": "distilled/patterns/goal-state-execution.md",
+          "relation": null,
+          "relationship": "Done Framework originates from Cowork's execution model",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/file-handoff-state-machine.md",
+          "relation": null,
+          "relationship": "File handoff pattern implemented in Cowork's multi-agent mode",
+          "note": null
+        },
+        {
+          "to": "distilled/failures/ambiguity-as-silent-execution.md",
+          "relation": null,
+          "relationship": "Cowork's autonomous execution is where this failure mode manifests",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Universal principles that Claude Cowork implements tool-specifically",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix with Claude Cowork as one of four profiled tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: reference (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/goal-state-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/file-handoff-state-machine.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/failures/ambiguity-as-silent-execution.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/references/gemini-deep-research-parameters.md",
+      "type": "reference",
+      "title": "Gemini Deep Research Operating Parameters",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "ref:gemini-deep-research-parameters-2026",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "tooling",
+        "agentic-systems"
+      ],
+      "tags": [
+        "research-tool",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 4,
+      "edges": [
+        {
+          "to": "distilled/patterns/explainable-reasoning-trace.md",
+          "relation": null,
+          "relationship": "ERT is most impactful inside Gemini DR's high-stakes research synthesis",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/evidence-tiered-source-policy.md",
+          "relation": null,
+          "relationship": "Gemini DR's browsing patterns create the source tier challenges this policy addresses",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/uncertainty-and-conflict-protocol.md",
+          "relation": null,
+          "relationship": "DR's multi-source synthesis requires explicit conflict handling",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Universal principles that Gemini DR implements tool-specifically",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix with Gemini DR as one of four profiled tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: reference (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/explainable-reasoning-trace.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/evidence-tiered-source-policy.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/uncertainty-and-conflict-protocol.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/references/llm-wiki-tool-ecosystem.md",
+      "type": "reference",
+      "title": "LLM Wiki Tool Ecosystem",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "ref:llm-wiki-tool-ecosystem-2026",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "tooling",
+        "knowledge-management"
+      ],
+      "tags": [
+        "search-tool",
+        "authoring-tool",
+        "integration-pattern"
+      ],
+      "language": null,
+      "inbound_count": 1,
+      "edges": [
+        {
+          "to": "distilled/patterns/three-layer-knowledge-architecture.md",
+          "relation": null,
+          "relationship": "Tools in this ecosystem operate within the three-layer architecture",
+          "note": null
+        },
+        {
+          "to": "distilled/concepts/knowledge-compounding.md",
+          "relation": null,
+          "relationship": "Tool ecosystem enables the compounding loop (ingest → query → file back)",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/idea-file-as-knowledge-seed.md",
+          "relation": null,
+          "relationship": "Idea files are the primary input format these tools process",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: reference (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/patterns/three-layer-knowledge-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/concepts/knowledge-compounding.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/idea-file-as-knowledge-seed.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/references/midjourney-v8-calibration.md",
+      "type": "reference",
+      "title": "Midjourney V8 Alpha Calibration Reference",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "ref:midjourney-v8-calibration-2026",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "tooling",
+        "prompting"
+      ],
+      "tags": [
+        "generative-tool",
+        "prompt-structure"
+      ],
+      "language": null,
+      "inbound_count": 6,
+      "edges": [
+        {
+          "to": "distilled/failures/keyword-salad-prompt-collapse.md",
+          "relation": null,
+          "relationship": "V8's literal execution makes keyword salad visibly harmful",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/explicit-component-ordering.md",
+          "relation": null,
+          "relationship": "V8-specific ordering rules (--s, --sw, style anchors)",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Companion generative tool reference — shared prompting principles, different modality",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Universal principles that MJ V8 implements tool-specifically",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix with MJ V8 as one of four profiled tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: reference (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/keyword-salad-prompt-collapse.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/explicit-component-ordering.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/references/veo3-production-parameters.md",
+      "type": "reference",
+      "title": "Veo3 Production Parameters Reference",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "ref:veo3-production-parameters-2026",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "medium",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "tooling",
+        "prompting"
+      ],
+      "tags": [
+        "generative-tool",
+        "prompt-structure"
+      ],
+      "language": null,
+      "inbound_count": 7,
+      "edges": [
+        {
+          "to": "distilled/failures/keyword-salad-prompt-collapse.md",
+          "relation": null,
+          "relationship": "Veo3's syntactic parsing makes keyword lists counterproductive",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/explicit-component-ordering.md",
+          "relation": null,
+          "relationship": "Veo3-specific ordering: scene geography → action → audio → style",
+          "note": null
+        },
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "Companion generative tool reference — shared prompting principles, different modality",
+          "note": null
+        },
+        {
+          "to": "distilled/patterns/delta-only-continuation.md",
+          "relation": null,
+          "relationship": "Delta-only continuation pattern first observed in Veo3 workflows",
+          "note": null
+        },
+        {
+          "to": "distilled/models/veo3.md",
+          "relation": null,
+          "relationship": "Compiled model profile that synthesizes this reference into a reader-ready page",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Universal principles that Veo3 implements tool-specifically",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Comparison matrix with Veo3 as one of four profiled tools",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "INVALID-TYPE: reference (not in canonical 9-type set)",
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/failures/keyword-salad-prompt-collapse.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/explicit-component-ordering.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/patterns/delta-only-continuation.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/models/veo3.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/synthesis/model-comparison-matrix.md",
+      "type": "synthesis",
+      "title": "Model Comparison Matrix",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "synth:model-comparison-matrix",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "tooling"
+      ],
+      "tags": [
+        "prompt-structure",
+        "prompt-ordering",
+        "generative-tool",
+        "research-tool",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 9,
+      "edges": [
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "Full MJ V8 prompting profile",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Full Veo3 prompting profile",
+          "note": null
+        },
+        {
+          "to": "distilled/references/gemini-deep-research-parameters.md",
+          "relation": null,
+          "relationship": "Full Gemini DR prompting profile",
+          "note": null
+        },
+        {
+          "to": "distilled/references/claude-cowork-architecture.md",
+          "relation": null,
+          "relationship": "Full Claude Cowork prompting profile",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/universal-prompting-principles.md",
+          "relation": null,
+          "relationship": "Universal principles this matrix contextualizes per model",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/gemini-deep-research-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/claude-cowork-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/universal-prompting-principles.md uses prose relationship; should migrate to typed relation"
+      ]
+    },
+    {
+      "path": "distilled/synthesis/universal-prompting-principles.md",
+      "type": "synthesis",
+      "title": "Universal Prompting Principles",
+      "tldr": null,
+      "goal": null,
+      "dedupe_key": "synth:universal-prompting-principles",
+      "lifecycle": "current",
+      "provenance_tier": null,
+      "confidence": "high",
+      "modality": [],
+      "tools": [],
+      "domains": [
+        "prompting",
+        "agentic-systems"
+      ],
+      "tags": [
+        "prompt-structure",
+        "prompt-ordering",
+        "agent-architecture"
+      ],
+      "language": null,
+      "inbound_count": 19,
+      "edges": [
+        {
+          "to": "distilled/references/midjourney-v8-calibration.md",
+          "relation": null,
+          "relationship": "MJ V8 application of universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/references/veo3-production-parameters.md",
+          "relation": null,
+          "relationship": "Veo3 application of universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/references/gemini-deep-research-parameters.md",
+          "relation": null,
+          "relationship": "Gemini DR application of universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/references/claude-cowork-architecture.md",
+          "relation": null,
+          "relationship": "Claude Cowork application of universal principles",
+          "note": null
+        },
+        {
+          "to": "distilled/synthesis/model-comparison-matrix.md",
+          "relation": null,
+          "relationship": "Where models diverge from universal principles",
+          "note": null
+        }
+      ],
+      "_issues": [
+        "V2-MISSING: provenance.tier (replaces flat confidence)",
+        "V1-EDGE: distilled/references/midjourney-v8-calibration.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/veo3-production-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/gemini-deep-research-parameters.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/references/claude-cowork-architecture.md uses prose relationship; should migrate to typed relation",
+        "V1-EDGE: distilled/synthesis/model-comparison-matrix.md uses prose relationship; should migrate to typed relation"
+      ]
+    }
+  ]
+}

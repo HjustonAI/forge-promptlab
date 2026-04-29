@@ -12,12 +12,16 @@ This directory will hold the actual scripts. This README defines the contract.
 
 | Hook | Event | Match | Action | Status |
 |---|---|---|---|---|
-| `validate-frontmatter.sh` | PreToolUse Write | `distilled/**` `compiled/**` | Parse YAML, validate against schema in `policies.md`. Reject on missing required fields, type mismatch, unknown enum values | Strict from day 1 |
-| `block-raw-edits.sh` | PreToolUse Edit/Write | `raw/**` (excluding `*.envelope.md`) | Reject all writes. Raw is immutable. | Strict from day 1 |
-| `check-dedupe-key.sh` | PreToolUse Write | `distilled/**` `compiled/**` | Grep all artifacts for `dedupe_key`. Reject on collision unless `supersedes` is set. | Strict from day 1 |
-| `enforce-tag-vocab.sh` | PreToolUse Write | `distilled/**` `compiled/**` | All `tags`, `domains`, `modality`, `tools` values must exist in `taxonomy.md`. | Warn-only during 2-week backfill, then strict |
-| `enforce-min-crossrefs.sh` | PreToolUse Write | `distilled/**` `compiled/**` | Atomic ≥ 2 typed `see_also`, compiled ≥ 3. | Warn-only during 2-week backfill, then strict |
-| `regenerate-index-json.sh` | PostToolUse Write | `distilled/**` `compiled/**` | Trigger lint skill to rebuild `INDEX.json`. Async. | Strict from day 1 |
+| `validate-frontmatter.mjs` | PreToolUse Write | `distilled/**` `compiled/**` | Parse YAML, validate against schema in `policies.md`. Reject on missing required fields, type mismatch, unknown enum values | Strict |
+| `block-raw-edits.mjs` | PreToolUse Edit/Write | `raw/**` (excluding `*.envelope.md`) | Reject all writes. Raw is immutable. | Strict |
+| `check-dedupe-key.mjs` | PreToolUse Write | `distilled/**` `compiled/**` | Read INDEX.json for dedupe keys. Reject on collision unless `supersedes` is set. | Strict |
+| `enforce-tag-vocab.mjs` | PreToolUse Write | `distilled/**` `compiled/**` | All `tags`, `domains`, `modality`, `tools` values must exist in `taxonomy.md`. | Strict |
+| `enforce-min-crossrefs.mjs` | PreToolUse Write | `distilled/**` `compiled/**` | Atomic ≥ 2 typed `see_also`, compiled ≥ 3. | Strict |
+| `regenerate-index-json.mjs` | PostToolUse Write | `distilled/**` `compiled/**` | Trigger `node .claude/skills/lint/build-index.mjs` to rebuild `INDEX.json`. Async. | Strict |
+
+**All hooks strict from day one.** The greenfield approach (Phase D purification clears v1 corpus before re-ingest) means no backfill window is needed.
+
+**Implementation note:** hooks are Node ESM scripts, not shell scripts. We already have Node 22 installed for qmd, and the lint script proved that pure-Node + regex frontmatter parsing works without npm dependencies. Sharing one extraction module between lint and hooks reduces drift.
 
 ---
 

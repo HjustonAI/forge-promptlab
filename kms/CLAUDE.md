@@ -90,10 +90,11 @@ Compile playbook: .claude/skills/compile-playbook/SKILL.md
 - raw/** is immutable (enforced by block-raw-edits hook)
 - All distilled/** + compiled/** files must pass validate-frontmatter hook
 - tldr (≤ 280 chars) and goal fields are mandatory on every atomic artifact
-- Minimum 2 typed cross-references per artifact (warn-only during backfill, then strict)
+- Minimum 2 typed cross-references per artifact
 - All tags must exist in taxonomy.md before use
 - No artifact in distilled/** or compiled/** without provenance.tier set
 - Compiled artifacts MUST list compiled_from with at least one atomic source
+- All hooks strict from day one — there is no backfill window (greenfield approach)
 </hard_constraints>
 
 <anti_patterns>

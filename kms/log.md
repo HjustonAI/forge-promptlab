@@ -872,3 +872,138 @@ Vulkan OOM during rerank repeated (same 325MB allocation failure). Non-blocking 
 
 `qmd embed` printed `Model: hf:ggml-org/embeddinggemma-300M-GGUF` despite QMD_EMBED_MODEL being set to Qwen3 in the same shell. Querying succeeded with no dimension mismatch, confirming Qwen3 was actually used. The banner is a printed default, not a dynamic readout. Cosmetic only.
 
+
+---
+
+## [2026-04-29] system | Lint Skill Operational + Coverage Gap Closed
+
+Action: Built and ran the lint skill. Generated first INDEX.json. Closed the qmd coverage gap by adding 3 legacy collections.
+
+### Files written
+
+- `.claude/skills/lint/build-index.mjs` — pure-Node ESM (no npm deps), regex-based YAML frontmatter extractor scoped to our schema. Walks `distilled/**` + `compiled/**`, builds graph, validates against v2 schema, emits INDEX.json + console report. Exit 0 = warn-only; Exit 1 = hard errors (dedupe collision, broken link).
+- `.claude/skills/lint/SKILL.md` — operator/agent-facing documentation. When to invoke, what it produces, issue-code reference, fix patterns.
+- `INDEX.json` — first machine-readable graph snapshot. 33 artifacts, edges, full per-artifact `_issues` array. This is the wrapper's typed-graph fallback to qmd hybrid retrieval.
+
+### Lint findings — corpus reality check
+
+| Metric | Value | Notes |
+|---|---|---|
+| Total artifacts | 33 | Was 21 in qmd; 12 were uncovered (models/, references/, synthesis/) |
+| By type | pattern 13, failure 6, reference 5, model-profile 4, concept 3, synthesis 2 | `reference` and `model-profile` are v1 types — must be re-typed in Phase C |
+| Dedupe collisions | 0 | ✅ |
+| Orphans | 0 | ✅ — graph fully connected |
+| Broken links | 0 | ✅ |
+| Bidirectionality issues | 41 | Real fix list — every reciprocal needs adding |
+| v2 complete | 1/33 | Only `ingest-pipeline.md` |
+| v1 remaining | 32 | All need tldr/goal/provenance.tier + typed relations |
+| Per-artifact lint issues | 225 | Sum of v2-MISSING + V1-EDGE + similar warns |
+
+### Phase C migration scope is now precisely measured
+
+The lint output gives the full migration backlog as numbers, not vibes:
+
+- 32 artifacts need v2 frontmatter migration (add: tldr, goal, keywords, modality, tools, structured provenance, language, decay_triggers)
+- 41 bidirectionality fixes (each see_also that goes one way needs the reciprocal added)
+- 9 artifacts on retired v1 types — must be re-typed AND moved:
+  - 4 `distilled/models/*.md` (`model-profile`) → `compiled/profiles/*.md` (`profile`)
+  - 5 `distilled/references/*.md` (`reference`) — type retired in v2; each must be re-classified as `concept`, `tool`, or `mechanism` based on content
+  - 2 `distilled/synthesis/*.md` (`synthesis`) → `compiled/syntheses/*.md` (no type rename, just directory move)
+- ~150 V1-EDGE upgrades (prose `relationship` → typed `relation` enum)
+
+Single migration script can handle the bulk; manual judgment needed for the 5 `reference` re-classifications.
+
+### qmd coverage gap closed
+
+Added 3 legacy collections (`models`, `references`, `synthesis-legacy`) to qmd. All 33 artifacts now indexed (was 21). Setup.sh updated to register these on re-run. `synthesis-legacy` excluded from default queries since its content will be physically relocated; `models` and `references` kept default-included because their content is retrieval-relevant during the transition.
+
+Embedded 68 new chunks from 11 documents (18s on the warm Vulkan path).
+
+### Decisions locked
+
+1. Lint is mechanical and deterministic. No judgment calls inside the script. Exit codes drive CI/hooks; severity is fixed.
+2. v1-compat inverse relations (`implemented-by`, `mitigated-by`, etc.) are accepted by the lint validator during migration. They'll be considered first-class in v2 since bidirectional graphs need either symmetric edges or paired forward+inverse forms.
+3. Phase C migration will be a dedicated session with a deterministic migration script — not piecemeal manual edits across this corpus. The script will use the lint output as its work-list.
+
+### Sanity check on schema
+
+The lint surfaced one hidden truth: `reference` was a v1 type that the v2 redesign **removed** without explicitly retyping its 5 instances. This is technical debt the schema doc itself should acknowledge. Phase C must classify each `reference` artifact as one of: `concept` (factual claim about a model/system), `tool` (lean factual surface for a controllable tool), or split into `tool` + `mechanism` pair. Manual judgment unavoidable for these.
+
+### Next-session priorities
+
+1. **Migration script** (`.claude/skills/migrate-artifact/SKILL.md` + executable): walks INDEX.json's `_issues` array, applies deterministic v1→v2 transforms per artifact, writes back, re-runs lint.
+2. **Reference re-classification** (5 artifacts): manual judgment session.
+3. **Bidirectionality backfill**: 41 reciprocal links — likely fold into the migration script as it processes each artifact.
+4. **First playbook**: candidate goal "How to ingest a deep research source best?" — composes from ingest-pipeline + three-layer-knowledge-architecture + rag-cross-document-insight-loss.
+
+
+---
+
+## [2026-04-30] system | Greenfield Pivot — V1 Corpus is Scaffolding, Not Knowledge
+
+Operator decision: do not migrate the v1 corpus. Treat it as design scaffolding that informed the v2 schema; discard it at Phase D before re-ingesting source material under v2 rules.
+
+### What this cancels
+
+- ~150 prose `relationship` → typed `relation` rewrites
+- 41 bidirectionality reciprocal-link fixes
+- 5 manual `reference` artifact re-classifications (concept | tool | mechanism judgment calls)
+- 9 directory moves (4 model-profile→profile, 5 reference deletion, 2 synthesis→syntheses)
+- Migration script + skill (`migrate-artifact`)
+- The whole 2-week warn-only backfill window for hooks
+
+### What this unlocks
+
+- All hooks ship strict from day one
+- Every artifact post-purification is v2-pure (no mixed schema, no v1-compat inverse relations, no transitional debt)
+- Schema can still break freely during Phase C if authoring real artifacts reveals a gap — no migration burden disincentivizing changes
+- First playbook composes only from v2-pure atomics
+- The empty-corpus exit gate is concrete and binary: lint shows 0 issues → Phase D ready
+
+### Reshaped 6-phase plan
+
+| Phase | Status | Goal |
+|---|---|---|
+| A — Spec lock | ✅ done | v2 schema, kernel, taxonomy, policies, README brief |
+| B — Retrieval bootstrap | ✅ done | qmd installed, MCP registered, retrieval contract validated |
+| B+ — Lint tooling | ✅ done | build-index.mjs operational, INDEX.json shipping |
+| C — System hardening | 🚧 in progress | Rule files (10 ingest + 3 compile), executable hooks (Node ESM, strict), ingest skill, compile-playbook skill. Exit gate: empty wiki passes lint with 0 issues. |
+| D — Purification | planned | Delete v1 corpus from distilled/; keep raw/; reset INDEX.json + index.md; v2 epoch begins |
+| E — Re-ingest | planned | Re-distill from raw/ in disciplined order. After ~5 sources, author first playbook. After ~10-15, density unlocks Phase F. |
+| F — The wrapper | planned | Meta-prompter agent. Reads qmd MCP + INDEX.json. Generates prompts conditioned on retrieved bundles. |
+
+### Files updated in this pivot
+
+- CLAUDE.md kernel — `<hard_constraints>` removed "warn-only during backfill" qualifier; added "All hooks strict from day one — there is no backfill window (greenfield approach)"
+- policies.md §Quality Gates — Gate 7 enforcement column simplified to "Hook"
+- policies.md §Hook Contract — all 6 hooks listed as Strict; added explicit greenfield rationale paragraph
+- policies.md §Migration Note → §Greenfield Note — replaced migration narrative with discard-and-re-ingest narrative
+- .claude/hooks/README.md — all hooks Strict; renamed planned scripts from `.sh` to `.mjs` (Node ESM, leveraging the lint script's pattern of pure-Node + regex extraction with no npm deps)
+- README.md §10 — full status section rewritten with the 6-phase plan and the pivot rationale at the bottom
+
+### Schema spec was already clean
+
+Grepped policies.md and taxonomy.md for v1 type leakage (`model-profile`, `reference`, etc.) — only found incidental uses of the words "reference" in non-type contexts (cross-references, reference image). The spec is correct as written. The misalignment was 100% in the v1 corpus, which Phase D deletes.
+
+### Implementation note — hooks as Node ESM
+
+Pivoting hook implementation from shell scripts to Node ESM scripts. Reasons:
+1. We already require Node 22 for qmd
+2. The lint script (`.claude/skills/lint/build-index.mjs`) proved that pure-Node + regex frontmatter extraction works without npm deps
+3. Sharing one extraction module between lint and hooks reduces drift — the hook validates the same way lint does
+4. Cross-platform (Windows + macOS + Linux) — shell scripts have edge cases on Git Bash for Windows that ESM avoids
+
+### Decision locked
+
+V1 corpus is not migrated. Phase D will delete it. Phase E re-ingests from raw/ under v2 rules. This is the path forward.
+
+### Next session
+
+Pick up Phase C. Order:
+1. Author 10 ingest mode rules (`.claude/rules/ingest-*.md`) — defines per-mode extraction behavior
+2. Author 3 compile rules (`.claude/rules/compile-*.md`) — defines body skeletons for compiled types
+3. Author the ingest skill (`.claude/skills/ingest/SKILL.md`) — operator-invocable executable workflow
+4. Implement the 5 hooks as Node ESM (sharing extraction module with lint)
+5. Wire hooks into .claude/settings.json
+6. Verify: empty corpus + lint = 0 issues → Phase D green light
+

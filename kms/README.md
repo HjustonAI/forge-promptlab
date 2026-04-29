@@ -296,59 +296,88 @@ A wrapper traversing the graph can do mechanical reasoning: "find all patterns t
 
 ---
 
-## 10. Where We Are Today (Project Status, 2026-04-29)
+## 10. Where We Are Today (Project Status, 2026-04-30)
 
-### What's done — Phase A (Spec Lock) ✅
+The plan is six phases. Phases A–B are complete. Phase C is in progress. The remaining v1 corpus is treated as **design scaffolding, not knowledge** — it taught us what the schema needed to be, then gets discarded at Phase D so the system ships v2-pure.
 
-- New v2 schema authored: 9 artifact types, structured provenance, typed relation enum, qmd-aware frontmatter
-- Slim XML-walled CLAUDE.md kernel (~120 lines, hits empirical Claude 4.x adherence target)
-- Full schema spec in `policies.md`
-- Extended taxonomy: modalities, tool registry, provenance tiers, language axis
-- README contracts for `.qmd/`, `.claude/hooks/`, `.claude/rules/`, `.claude/skills/`
-- Setup script and gitignore
+### Phase A — Spec Lock ✅
 
-### What's done — Phase B (Retrieval Bootstrap) ✅
+v2 schema, taxonomy, policies, slim XML-walled CLAUDE.md kernel (~120 lines), README brief, README contracts for qmd/hooks/rules/skills, setup script, gitignore.
 
-- qmd installed (`@tobilu/qmd`) with multilingual Qwen3-Embedding model (1024-dim)
-- 10 collections defined; 4 currently populated (patterns, failures, concepts, raw)
-- 39 documents, 128 chunks indexed
-- `raw` collection excluded from default queries (envelope-pollution fix; raw is opt-in via `-c raw`)
-- Per-collection semantic context strings registered (improves rerank ranking)
-- qmd MCP server registered in `.claude/settings.json`
+### Phase B — Retrieval Bootstrap ✅
+
+- qmd installed (`@tobilu/qmd`) with multilingual Qwen3-Embedding (1024-dim, 119 languages)
+- 13 collections registered (10 v2-target + 3 v1-legacy for transition coverage)
+- All 33 v1 artifacts indexed during transition; ~196 chunks embedded
+- qmd MCP server registered in `.claude/settings.json`; wrapper uses qmd as primary retrieval surface
 - GPU offloading verified (RTX 2080 Super, Vulkan)
-- **Retrieval contract empirically validated**: a natural-language query returns distilled artifacts ahead of raw, with no envelope pollution
+- Retrieval contract empirically validated — natural-language queries return distilled artifacts ahead of raw, no envelope pollution
 
-### What's done — first v2 artifact ✅
+### Phase B+ — Lint Tooling ✅
 
-- `distilled/patterns/ingest-pipeline.md` authored under full v2 schema
-- 5 reciprocal ripple updates to existing artifacts (lands inside the 5–15 band the pattern itself predicts — the pattern documents its own behavior accurately)
-- Re-tested retrieval: new artifact lands at **rank 1** for the original test query (56% score), displacing the previous top hit
+- `.claude/skills/lint/build-index.mjs` — pure-Node lint and INDEX.json builder, no npm deps, regex-based YAML extraction tuned to our schema
+- `.claude/skills/lint/SKILL.md` — invocation contract, issue codes, exit semantics
+- First `INDEX.json` generated — machine-readable typed-graph snapshot (33 artifacts, edges, full per-artifact `_issues`)
 
-### What's open — Phase C (Migration & Authoring)
+### Phase C — System Hardening 🚧 (in progress)
 
-The skeleton works. The next phases broaden coverage and harden enforcement:
+Build everything the v2 instrument needs **before** Phase D purification. Goal: an empty wiki that passes its own lint with zero issues.
 
-| Priority | Item | Why it matters |
+| Priority | Item | Status |
 |---|---|---|
-| P0 | Author 2-3 more v2 patterns | Each new artifact stress-tests the schema, exposes gaps, builds graph density |
-| P0 | First `playbook` artifact | Proves the wrapper-input format end-to-end. Goal candidate: "How to ingest a deep research source best?" |
-| P1 | Backfill v1 artifacts to v2 | The mixed-syntax `see_also` pattern visible in current commit shows exactly what the migration script must handle. Big retrieval-quality lift |
-| P1 | Build the lint skill | Regenerates INDEX.json. Unblocks typed-graph traversal for wrapper |
-| P2 | Land hooks (warn-only → strict) | Currently README-only. Strict on `validate-frontmatter` + `block-raw-edits` from day one once shipped; warn-only on others through 2-week backfill |
-| P2 | Author rule files | The 13 path-scoped `.claude/rules/ingest-*.md` files for per-mode ingest behavior |
+| P0 | Authoring rules per ingest mode (`.claude/rules/ingest-*.md` × 10) | Plan-only |
+| P0 | Compile-skill rules (`.claude/rules/compile-{profile,synthesis,playbook}.md`) | Plan-only |
+| P0 | Ingest skill (`.claude/skills/ingest/SKILL.md` — executable workflow) | Plan-only |
+| P1 | `validate-frontmatter` hook (Node ESM, strict) | Plan-only |
+| P1 | `block-raw-edits` hook (strict) | Plan-only |
+| P1 | `check-dedupe-key` hook (reads INDEX.json) | Plan-only |
+| P1 | Settings.json wires hooks as PreToolUse | Plan-only |
+| P2 | `compile-playbook` skill | Plan-only |
+| P2 | Lint hook (PostToolUse, async INDEX.json regeneration) | Plan-only |
 
-### What's much further out — Phase D (The Wrapper)
+Phase C exits when running `node .claude/skills/lint/build-index.mjs` against an **empty** `distilled/` and `compiled/` produces zero issues. That's the green light for Phase D.
 
-The meta-prompter wrapper itself. It will:
+### Phase D — Purification (planned)
 
-1. Receive user goal: "How to [verb] [object] best?"
-2. Call qmd MCP `query` with collection hint inferred from the goal
-3. Read top-N tldrs, deep-read top 2-3 via `get`
-4. Optionally read `INDEX.json` for typed graph traversal
-5. Synthesize a new prompt conditioned on the bundle
-6. (Ripple loop) File new insights back as wiki artifacts via the ingest skill
+Single decisive operation:
+
+1. Delete the v1 corpus (`distilled/{patterns,concepts,failures,models,references,synthesis}`). The directories stay; the v1 files are gone. Their value was scaffolding; that scaffolding paid off in the v2 schema you're holding now.
+2. Keep `raw/` intact — the source material is valuable and will be re-ingested under v2 rules.
+3. Reset `index.md` and `INDEX.json` to clean catalogs.
+4. Append a v2-epoch log entry.
+
+### Phase E — Re-Ingest (planned)
+
+Re-introduce knowledge in disciplined order:
+
+1. `raw/idea-files/forge-heart-wiki-idea-v1.md` — the wiki's foundational idea file
+2. `raw/deep-research/karpathy-llm-wiki-guide.md` — exercises `deep-research` mode
+3. `raw/deep-research/llm-wiki.ctx.md` — different research-shape variant
+4. `Claude md Best Practices Research.md` — first paper/article-mode test
+5. One Veo 3 source — first image/video modality artifact
+6. One Midjourney source — enables first cross-tool synthesis
+7. One agentic source (cowork architecture) — first agentic-modality artifact
+
+After ~5 sources, author the **first playbook**: "How to ingest a deep research source best?" — composed from the (re-authored) ingest-pipeline pattern, the three-layer-knowledge-architecture concept, and the rag-cross-document-insight-loss failure. Proves the wrapper-input format end-to-end with v2-pure atomics.
+
+After ~10–15 sources, the corpus has enough density for Phase F.
+
+### Phase F — The Wrapper (planned)
+
+The meta-prompter agent itself. Reads qmd MCP + `INDEX.json`. Generates prompts conditioned on retrieved bundles. Where the strategic value materializes.
+
+1. Receives user goal: "How to [verb] [object] best?"
+2. Calls qmd MCP `query` with collection hint inferred from the goal
+3. Reads top-N tldrs, deep-reads top 2-3 via `get`
+4. Reads `INDEX.json` for typed graph traversal (e.g., follow `composes-with` edges)
+5. Synthesizes a new prompt conditioned on the bundle
+6. (Ripple loop) Files new insights back as wiki artifacts via the ingest skill
 
 The wiki's responsibility ends at "served the right typed knowledge." The wrapper's responsibility begins at "compose a great prompt." This separation is non-negotiable — it's what keeps canonical knowledge clean.
+
+### What changed on 2026-04-30 (greenfield pivot)
+
+The original plan included migrating 32 v1 artifacts to v2. **Cancelled.** The v1 corpus was design scaffolding — its value was in informing the schema, not in being preserved. Phase D deletes it; Phase E re-ingests from raw under v2 rules. This eliminates ~150 prose→typed-relation rewrites, 41 bidirectionality fixes, 5 reference re-classifications, and 9 directory moves. Hooks ship strict from day one because there is no backfill window.
 
 ---
 

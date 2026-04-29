@@ -169,7 +169,7 @@ No artifact may be published without passing all eight gates:
 | 4 | Freshness | `updated` set, `lifecycle` assigned, `decay_triggers` present where applicable | Hook |
 | 5 | Dedupe | `dedupe_key` unique across wiki | Hook |
 | 6 | Contradiction | Conflicts noted in `contradictions` or confirmed absent | Lint |
-| 7 | Cross-references | ≥ 2 typed `see_also` entries, bidirectional | Hook (warn-only during backfill) |
+| 7 | Cross-references | ≥ 2 typed `see_also` entries, bidirectional | Hook |
 | 8 | Retrieval | `tldr` ≤ 280 chars, `goal` set on atomic + playbook | Hook |
 
 Failing any gate → artifact stays draft, flagged in log.
@@ -358,11 +358,13 @@ Hooks (`.claude/hooks/*.sh`) enforce what prose cannot. See `.claude/hooks/READM
 | `validate-frontmatter` | PreToolUse Write to `distilled/**` `compiled/**` | Reject on schema mismatch | Strict |
 | `block-raw-edits` | PreToolUse Edit/Write to `raw/**` | Reject all writes | Strict |
 | `check-dedupe-key` | PreToolUse Write | Reject on collision | Strict |
-| `enforce-tag-vocab` | PreToolUse Write | Reject tags not in taxonomy.md | Warn-only during backfill |
-| `enforce-min-crossrefs` | PreToolUse Write | Reject on < 2 typed see_also | Warn-only during backfill |
+| `enforce-tag-vocab` | PreToolUse Write | Reject tags not in taxonomy.md | Strict |
+| `enforce-min-crossrefs` | PreToolUse Write | Reject on < 2 typed see_also | Strict |
+
+All hooks strict from day one. The greenfield approach (Phase D purification clears the v1 corpus before re-ingest) means no backfill window is needed — every artifact is authored under v2 from creation.
 
 ---
 
-## Migration Note
+## Greenfield Note
 
-This spec replaces the previous v1 schema (six types, flat confidence, prose relations). Existing artifacts are migrated additively: new fields added as optional, then made strict after backfill. See `log.md` for migration entries.
+This spec replaces the previous v1 schema (six types, flat confidence, prose relations). The v1 corpus is treated as design scaffolding — it informed the v2 schema design but is not migrated. Phase D purification deletes the v1 corpus; Phase E re-ingests source material under v2 rules from raw/. All hooks ship strict from day one. See `log.md` for the pivot entry (2026-04-30).
