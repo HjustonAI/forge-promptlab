@@ -29,6 +29,9 @@ see_also:
     relationship: "Wiki enables compounding; RAG retrieves without accumulating"
   - artifact: distilled/patterns/llm-maintenance-cost-shift.md
     relationship: "LLM maintenance makes compounding sustainable at scale"
+  - artifact: distilled/patterns/ingest-pipeline.md
+    relation: enabled-by
+    note: "The ingest pipeline's ripple step is the operational mechanism that produces compounding"
 supersedes: []
 ---
 

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://claude.ai/claude-code/settings.schema.json",
+  "_comment": "Forge Heart Wiki — Claude Code settings. qmd MCP registered for retrieval. Hooks configuration follows current Claude Code spec at install time; see .claude/hooks/README.md for the contract.",
+  "mcpServers": {
+    "qmd": {
+      "command": "qmd",
+      "args": ["mcp"],
+      "env": {
+        "QMD_EMBED_MODEL": "hf:Qwen/Qwen3-Embedding-0.6B-GGUF/Qwen3-Embedding-0.6B-Q8_0.gguf"
+      }
+    }
+  },
+  "permissions": {
+    "allow": [
+      "Bash(qmd status)",
+      "Bash(qmd update)",
+      "Bash(qmd embed)",
+      "Bash(qmd embed -f)",
+      "Bash(qmd cleanup)",
+      "Bash(qmd search:*)",
+      "Bash(qmd vsearch:*)",
+      "Bash(qmd query:*)",
+      "Bash(qmd get:*)",
+      "Bash(qmd multi-get:*)",
+      "Bash(qmd collection:*)"
+    ],
+    "deny": []
+  }
+}

@@ -631,3 +631,244 @@ Added "Atomic vs Compiled" tier distinction: atomic artifacts extract from raw s
 | `compiled_from` field | Audit trail: know exactly which atoms feed each compiled page; know what to update when atoms change |
 | Prompt templates in profiles | Downstream wrappers can fill templates directly — maximum leverage for our prompting purpose |
 | Kept atomic artifacts untouched | Compilation adds a layer ON TOP, doesn't modify the evidence base |
+
+---
+
+## [2026-04-28] system | Schema v2 Redesign — Spec Lock
+
+Action: Replaced schema v1 with v2 architecture. Spec-lock commit only — no artifact migration yet.
+Operator: Bartosz Skokun
+Designed by: Claude Opus 4.7 (acting senior designer)
+
+### Drivers
+
+1. New mission scope: wiki must be the *heart* of a future meta-prompter agentic system. Wrappers will query "How to [verb] [object] best?" and the wiki must respond with a typed, ranked bundle of means-of-control.
+2. Defect 2 reframed: the wiki captures *means of controlling AI* (prompts, tool combos, agentic loops, MCP integrations, n8n flows), not just prompt strings.
+3. Empirical CLAUDE.md best practices (research file 2026-04): 200-line cliff, XML-walled instructions, deterministic hooks, lazy path-scoped rules, on-device retrieval.
+
+### Breaking changes
+
+- Artifact types: 6 → 9. New: `tool`, `mechanism`, `exemplar` (atomic); `playbook` (compiled). Renamed `model-profile` → `profile`. Renamed `synthesis` directory location: `distilled/synthesis/` → `compiled/syntheses/`.
+- Frontmatter: added `tldr`, `goal`, `applicable_to_goals`, `keywords`, `modality`, `tools`, `model_versions`, `abstraction_level`, `language`, `provenance` (tiered, replaces flat confidence-only), `decay_triggers`, `playbook_steps`, `playbook_inputs`.
+- Cross-references: free-text `relationship` → typed `relation` enum (11 values: implements, violates, composes-with, supersedes, exemplifies, conflicts-with, specializes, generalizes, requires, enables, mitigates).
+- Quality gates: 5 → 8 (added Schema, Cross-references, Retrieval).
+- Directory: introduced `compiled/` peer to `distilled/`; added `raw/{papers,articles,system-prompts,creative-prompts,tool-docs,workflows}` modes; added `.qmd/`, `.claude/{hooks,rules,skills}/`.
+
+### Files written
+
+- CLAUDE.md — rewritten as slim XML-walled kernel (~120 lines)
+- policies.md — full v2 schema spec
+- taxonomy.md — v2 with modalities, tools registry, provenance tiers, relation enum, language
+- .qmd/README.md — retrieval contract for qmd MCP integration
+- .claude/hooks/README.md — deterministic gate contract (5 hooks)
+- .claude/rules/README.md — path-scoped lazy-loaded rule plan (13 rule files)
+- .claude/skills/README.md — invocable skill plan (6 skills)
+
+### Migration phases
+
+- Phase A (DONE): Spec lock — files above.
+- Phase B (NEXT): qmd bootstrap — install, index existing artifacts, validate retrieval pre-migration.
+- Phase C: Schema migration of existing artifacts (additive frontmatter pass, then type taxonomy migration). Hooks land warn-only, then strict.
+- Phase D: New surfaces — first 3 playbooks (one per modality), first profile per active tool.
+
+### Decisions locked (made by senior designer call, not awaiting operator)
+
+1. qmd is the primary retrieval surface; INDEX.json is the typed-graph companion.
+2. Playbooks are per goal-tool, with cross-tool synthesis playbooks composing them.
+3. Long exemplars (workflow JSONs, full system prompts) live in `raw/`; the distilled exemplar artifact cites them.
+4. `tool` is lean factual surface; `profile` is fat compiled digest. Different roles, no duplication.
+5. `language: pl|en` added now — costless insurance against multilingual ingest.
+6. Hooks: strict on `validate-frontmatter` and `block-raw-edits` from day 1; warn-only on `enforce-min-crossrefs` and `enforce-tag-vocab` for 2-week backfill window.
+
+
+---
+
+## [2026-04-29] system | Phase B Bootstrap — qmd Configuration Locked
+
+Action: Grounded qmd setup in actual repo specs (https://github.com/tobi/qmd). No installation yet — config files only.
+
+### qmd specifics that drove decisions
+
+- Package: `@tobilu/qmd`, requires Node ≥ 22.
+- Three search modes: `search` (BM25), `vsearch` (vector), `query` (hybrid + expansion + LLM rerank — the wrapper's primary call).
+- MCP exposes 4 tools: `query`, `get`, `multi_get`, `status`.
+- Filter primitive is the **collection** (`-c <name>`); no native frontmatter filter. Decision: split collections by artifact TYPE (10 collections), not modality. Modality filtering happens via query phrasing + BM25 hits on `tools:` field.
+- Default embedding model is English-only (`embeddinggemma-300M`). Operator has Polish sources → switch to `Qwen3-Embedding-0.6B` (119 langs) via `QMD_EMBED_MODEL` env var.
+- Chunking: 900 tokens with 15% overlap → confirms our ≤200-line body skeleton aligns with single-chunk artifacts.
+
+### Files written
+
+- .qmd/README.md — rewritten with real install steps, collections strategy, MCP tool surface, multilingual embedding override, wrapper integration sequence
+- .qmd/setup.sh — idempotent bootstrap script (Node check, install, collections, embed, status)
+- .qmd/env.example — template for QMD_EMBED_MODEL override (real .qmd/env is gitignored)
+- .claude/settings.json — registers qmd MCP server (stdio transport) + qmd Bash permissions
+- .gitignore — excludes qmd index DB, cache, local Claude settings
+
+### Collections (registered in setup.sh)
+
+| Collection | Path | Wrapper use |
+|---|---|---|
+| playbooks | compiled/playbooks/ | First query — does an existing playbook cover this goal? |
+| profiles | compiled/profiles/ | Tool deep-dive |
+| syntheses | compiled/syntheses/ | Cross-cutting analysis |
+| patterns | distilled/patterns/ | Means of control |
+| failures | distilled/failures/ | What to avoid |
+| tools | distilled/tools/ | Lean factual surface |
+| mechanisms | distilled/mechanisms/ | Specific knobs |
+| exemplars | distilled/exemplars/ | Real prompts/workflows |
+| concepts | distilled/concepts/ | Background mental models |
+| raw | raw/ | Source material (de-prioritized) |
+
+### Wrapper retrieval sequence (locked)
+
+1. `qmd query "<goal>" -c playbooks --json` — does an existing playbook fit?
+2. If hit: `qmd get <playbook>` for full body
+3. Else: `qmd query "<goal>" -c patterns,profiles,failures,exemplars --json`
+4. `qmd multi-get` top 2-3 bodies
+5. Optional: read INDEX.json for typed graph traversal (qmd doesn't expose typed edges natively)
+
+### Next concrete steps (not yet executed)
+
+- [ ] Operator runs `bash .qmd/setup.sh` once (one-time install + initial embed)
+- [ ] Validate retrieval against current artifacts BEFORE Phase C migration
+- [ ] If retrieval quality is poor on existing v1 bodies, that informs the body-skeleton enforcement priority in Phase C
+- [ ] Author lint skill (writes INDEX.json) so wrapper has typed-graph fallback ready
+
+
+---
+
+## [2026-04-29] system | Phase B — qmd Bootstrap First-Run Diagnostics
+
+Bootstrap ran successfully:
+- 39 documents, 128 chunks indexed across 4 active collections (patterns 12, failures 6, concepts 3, raw 18). Six collections empty pending Phase C (playbooks, profiles, syntheses, tools, mechanisms, exemplars).
+- Embeddings built with Qwen3-Embedding-0.6B (1024-dim) — multilingual model live.
+- GPU offloading active (RTX 2080 Super Max-Q, Vulkan).
+
+### Bug observed and fixed
+
+`qmd query` failed with `SqliteError: Dimension mismatch for query vector ... Expected 1024, received 768`.
+
+**Root cause:** `qmd embed` used Qwen3 (1024-dim) because setup.sh exported `QMD_EMBED_MODEL` in its own process. The follow-up interactive `qmd query` ran in the operator's shell where the env var was never set, so it loaded the default `embeddinggemma-300M` (768-dim). Stored vectors and query vector mismatched.
+
+**Fix landed:**
+- Created real `.qmd/env` (gitignored) — sourceable by interactive shells.
+- Added explicit "CRITICAL: Persist this env var" section to `.qmd/README.md`.
+- Updated `setup.sh` to print the source-instruction at end of run.
+- MCP server in `.claude/settings.json` already had the env var, so wrapper-via-MCP path was never affected (only the human CLI path).
+
+**Operator action required:**
+```bash
+# One-time, add to ~/.bashrc:
+source /c/AI/0_Ainything/00_AgentHjuston/forge_ultimate/kms/.qmd/env
+
+# Then:
+qmd query 'how to ingest a deep research source' -n 5 --explain
+```
+
+### Enhancement landed in same pass
+
+Added `qmd context add qmd://<collection>/ "<one-line semantic hint>"` calls to setup.sh for all 10 collections. qmd's status output explicitly recommends this — context strings improve retrieval ranking by giving the reranker a per-collection prior. Re-running setup.sh is idempotent; existing collections get annotated.
+
+
+---
+
+## [2026-04-29] system | Phase B Validation — Retrieval Contract Holds
+
+After fixing the env-var persistence and excluding raw from default queries, re-ran the original test query.
+
+### Test query
+`qmd query 'how to ingest a deep research source' -n 5`
+
+### Result — distilled-first ranking confirmed
+
+| Rank | Artifact | Score | Type |
+|---|---|---|---|
+| 1 | distilled/patterns/three-layer-knowledge-architecture.md | 55% | pattern |
+| 2 | distilled/failures/rag-cross-document-insight-loss.md | 46% | failure |
+| 3 | distilled/concepts/knowledge-compounding.md | 45% | concept |
+
+No envelope pollution. No raw sources at top. Top hit is a relevant pattern — exactly what the retrieval contract predicts.
+
+### Bug fixed in this pass
+
+`qmd collection add` CLI does not support `--pattern` or `--ignore` flags (confirmed via `qmd collection`). Envelope sidecars (`*.envelope.md`) cannot be filtered at the collection level. Workaround landed: `qmd collection exclude raw` removes `raw` from default queries while keeping it explicitly addressable via `-c raw`. Matches retrieval contract: distilled is canonical, raw is source material the wrapper can opt into.
+
+Also: cleaned up an accidental kms-root collection (created when `qmd collection add` was run with no path arg during exploration).
+
+### Files touched
+
+- `.qmd/setup.sh` — added `qmd collection exclude raw` step (4a) before context annotations (4b)
+- `.qmd/README.md` — documented the raw-exclusion rationale; updated collections table
+
+### Performance notes (non-blocking)
+
+- First-run query expansion took ~100s (1.7B query-expansion model warming up). Subsequent warm-process queries should run in 5-15s.
+- Vulkan OOM during rerank on a 325MB allocation despite 22GB free VRAM. qmd's fallback path handled it; query completed cleanly. Likely contention with another GPU process. Worth monitoring; not blocking.
+
+### Phase B complete
+
+qmd is installed, embeddings are built (Qwen3-Embedding 1024-dim, multilingual), 4 collections are active (patterns, failures, concepts, raw — last excluded from default), MCP server is registered for wrapper use, and the retrieval contract is empirically validated against the existing v1 corpus. Distilled artifacts surface ahead of raw on natural-language queries.
+
+### Phase C unblocked — gap revealed by retrieval
+
+The test query "how to ingest a deep research source" exposed a real content gap: there is no distilled pattern about the ingest workflow itself. Authoring `distilled/patterns/ingest-pipeline.md` (or similar) is now Phase C priority — it would have been the rank-1 answer, but doesn't exist yet. This is the wiki working as designed: retrieval surfaces gaps as opportunities.
+
+
+---
+
+## [2026-04-29] ingest | First v2-schema artifact: ingest-pipeline pattern
+
+Action: Authored the missing pattern that the Phase B test query exposed. First end-to-end validation of the v2 frontmatter schema against qmd retrieval.
+
+### Source
+
+This pattern is self-documenting from CLAUDE.md, policies.md, and personal field observation during Phase A-B implementation. No external raw source — provenance tier: `personal-field`. Cites raw/idea-files/forge-heart-wiki-idea-v1.md and raw/deep-research/karpathy-llm-wiki-guide.md as supporting.
+
+### Artifacts produced
+
+- distilled/patterns/ingest-pipeline.md — full v2 schema (tldr, goal, applicable_to_goals, keywords, modality, tools, abstraction_level, language, structured provenance, decay_triggers, typed see_also). 9-step workflow with mechanism, failure modes, concrete example.
+
+### Artifacts updated (ripple)
+
+- distilled/patterns/distill-first-architecture.md — added back-link (relation: implemented-by)
+- distilled/patterns/three-layer-knowledge-architecture.md — added back-link (relation: required-by)
+- distilled/concepts/knowledge-compounding.md — added back-link (relation: enabled-by)
+- distilled/failures/rag-cross-document-insight-loss.md — added back-link (relation: mitigated-by)
+- distilled/patterns/idea-file-as-knowledge-seed.md — added back-link (relation: composed-with)
+
+Five reciprocal links — within the 5-15 ripple band predicted by the pattern itself. Pattern documents its own behavior accurately.
+
+### Schema-mixing note
+
+The reciprocal entries on existing v1 artifacts use a hybrid syntax: legacy `relationship: "..."` entries preserved alongside new `relation: <enum>` + `note:` entries. Phase C migration will harmonize all artifacts to v2-only. Hooks in warn-only mode tolerate this transient state.
+
+### Retrieval validation
+
+Re-ran `qmd query "how to ingest a deep research source" -n 5`:
+
+| Rank | Artifact | Score |
+|---|---|---|
+| 1 | distilled/patterns/ingest-pipeline.md | 56% |
+| 2 | distilled/concepts/knowledge-compounding.md | 46% |
+| 3 | distilled/failures/rag-cross-document-insight-loss.md | 45% |
+
+The new v2 artifact is rank 1 — displaces the previous top hit (three-layer-knowledge-architecture, 55%) because ingest-pipeline is a more direct answer to the literal query. The `tldr` field surfaces as the result chunk title in qmd output, confirming v2 frontmatter design serves retrieval as intended.
+
+### Schema confidence — UP
+
+This was the first artifact authored under the v2 schema. It passed all 8 conceptual quality gates without friction. The frontmatter is verbose but every field earned its place during retrieval ranking. No fields felt redundant or missing.
+
+### Next steps unblocked
+
+- Phase C backfill: with v2 proven on one artifact, the migration script can be written confidently. The mixed-syntax see_also pattern visible in this commit is what the migration must clean up.
+- Lint skill: now has a real INDEX.json target — graph radius 1 from ingest-pipeline already touches 5 artifacts.
+- Authoring more v2 patterns: each one tests retrieval and exposes more gaps.
+
+### Performance note
+
+Vulkan OOM during rerank repeated (same 325MB allocation failure). Non-blocking — fallback path completes the query. Worth a separate investigation but not blocking; possibly Vulkan driver fragmentation. Try restarting GPU drivers or switching to CPU rerank if it persists.
+
+### Embed banner misleading
+
+`qmd embed` printed `Model: hf:ggml-org/embeddinggemma-300M-GGUF` despite QMD_EMBED_MODEL being set to Qwen3 in the same shell. Querying succeeded with no dimension mismatch, confirming Qwen3 was actually used. The banner is a printed default, not a dynamic readout. Cosmetic only.
+

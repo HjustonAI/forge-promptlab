@@ -32,6 +32,9 @@ see_also:
     relationship: "Architecture that enables systematic knowledge compounding"
   - artifact: distilled/references/llm-wiki-tool-ecosystem.md
     relationship: "Tools that operate within the three-layer architecture"
+  - artifact: distilled/patterns/ingest-pipeline.md
+    relation: required-by
+    note: "Ingest pipeline depends on this layer separation to function"
 supersedes: []
 ---
 

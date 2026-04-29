@@ -1,0 +1,17 @@
+# Local-only qmd state
+.qmd/env
+.qmd/index.sqlite
+.qmd/index.sqlite-journal
+.qmd/index.sqlite-wal
+.qmd/index.sqlite-shm
+.qmd/cache/
+
+# Claude Code per-user overrides
+.claude/settings.local.json
+CLAUDE.local.md
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

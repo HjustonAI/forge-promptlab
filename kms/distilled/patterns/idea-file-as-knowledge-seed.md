@@ -27,6 +27,9 @@ see_also:
     relationship: "Idea files populate the raw layer of the three-layer architecture"
   - artifact: distilled/patterns/prompt-as-architectural-brief.md
     relationship: "Idea files function as architectural briefs for knowledge systems"
+  - artifact: distilled/patterns/ingest-pipeline.md
+    relation: composed-with
+    note: "Idea-file mode is one of nine source-mode pipelines invoked by ingest"
 supersedes: []
 ---
 

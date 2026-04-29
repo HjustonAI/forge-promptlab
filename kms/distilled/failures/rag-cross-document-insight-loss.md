@@ -24,6 +24,9 @@ see_also:
     relationship: "RAG's chunk isolation prevents the cross-document synthesis that enables compounding"
   - artifact: distilled/patterns/distill-first-architecture.md
     relationship: "Distill-first solves this by pre-compiling cross-cutting knowledge"
+  - artifact: distilled/patterns/ingest-pipeline.md
+    relation: mitigated-by
+    note: "Ingest pipeline's ripple step actively prevents the cross-document silo failure"
 supersedes: []
 ---
 

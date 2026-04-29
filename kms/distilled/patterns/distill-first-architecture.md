@@ -29,6 +29,9 @@ see_also:
     relationship: "Compiled knowledge approach that distill-first serves"
   - artifact: distilled/patterns/evidence-tiered-source-policy.md
     relationship: "Source trust policy that feeds into distill-first quality gates"
+  - artifact: distilled/patterns/ingest-pipeline.md
+    relation: implemented-by
+    note: "The ingest pipeline is the operational write path that enforces this architecture"
 supersedes: []
 ---
 
