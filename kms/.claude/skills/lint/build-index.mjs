@@ -11,78 +11,15 @@
 import { readdir, readFile, writeFile, stat } from 'node:fs/promises';
 import { join, relative, posix } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  extractFrontmatter, getScalar, getInlineList, getNestedScalar, getSeeAlso,
+  VALID_TYPES, ATOMIC_TYPES, COMPILED_TYPES, VALID_RELATIONS, VALID_LIFECYCLE,
+} from '../../lib/frontmatter.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const KMS_ROOT = join(__dirname, '..', '..', '..');
 const SCAN_ROOTS = ['distilled', 'compiled'];
 const OUTPUT = join(KMS_ROOT, 'INDEX.json');
-
-// ─────────────────────────────────────────────────────────────────────────
-// Regex-based frontmatter extractor (handles our schema; not a full YAML parser)
-// ─────────────────────────────────────────────────────────────────────────
-
-const FRONTMATTER_RE = /^---\n([\s\S]*?)\n---/;
-
-function extractFrontmatter(content) {
-  const m = content.match(FRONTMATTER_RE);
-  return m ? m[1] : null;
-}
-
-function getScalar(fm, key) {
-  // Matches `key: "value"` or `key: value` — single line.
-  const re = new RegExp(`^${key}:\\s*(?:"([^"]*)"|([^\\n#]+?))\\s*(?:#.*)?$`, 'm');
-  const m = fm.match(re);
-  if (!m) return null;
-  const v = (m[1] ?? m[2] ?? '').trim();
-  return v === '' ? null : v;
-}
-
-function getInlineList(fm, key) {
-  // Matches `key: [a, b, c]` (one line, square-bracket style).
-  const re = new RegExp(`^${key}:\\s*\\[([^\\]\\n]*)\\]\\s*$`, 'm');
-  const m = fm.match(re);
-  if (!m) return null;
-  return m[1].split(',').map(s => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
-}
-
-function getNestedScalar(fm, parentKey, childKey) {
-  // Matches a child key indented under `parent:` block.
-  const re = new RegExp(`^${parentKey}:\\s*\\n(?:(?:\\s{2}.*\\n?)*)\\s{2}${childKey}:\\s*(?:"([^"]*)"|([^\\n#]+?))\\s*(?:#.*)?$`, 'm');
-  const m = fm.match(re);
-  if (!m) return null;
-  return (m[1] ?? m[2] ?? '').trim();
-}
-
-function getSeeAlso(fm) {
-  // Parses see_also block — list of {artifact, relation|relationship, note?}.
-  const startRe = /^see_also:\s*\n/m;
-  const start = fm.search(startRe);
-  if (start === -1) return [];
-  // Find end of the see_also block — next top-level key (line starting at col 0 with non-whitespace, non-dash)
-  const after = fm.slice(start);
-  const linesAfter = after.split('\n').slice(1); // skip the `see_also:` header
-  const collected = [];
-  for (const line of linesAfter) {
-    if (line.length === 0) { collected.push(line); continue; }
-    if (/^[A-Za-z_]/.test(line[0])) break; // next top-level key
-    collected.push(line);
-  }
-  const block = collected.join('\n');
-  // Split into items beginning with `  - `
-  const items = block.split(/^\s{2}-\s+/m).slice(1);
-  return items.map(item => {
-    const artifact = (item.match(/^artifact:\s*(.+?)\s*$/m) || [])[1] || null;
-    const relation = (item.match(/^\s*relation:\s*(.+?)\s*$/m) || [])[1] || null;
-    const relationship = (item.match(/^\s*relationship:\s*(?:"([^"]*)"|(.+?))\s*$/m) || []);
-    const note = (item.match(/^\s*note:\s*(?:"([^"]*)"|(.+?))\s*$/m) || []);
-    return {
-      artifact: artifact?.trim() || null,
-      relation: relation?.trim() || null,
-      relationship: (relationship[1] ?? relationship[2] ?? '').trim() || null,
-      note: (note[1] ?? note[2] ?? '').trim() || null,
-    };
-  }).filter(e => e.artifact);
-}
 
 // ─────────────────────────────────────────────────────────────────────────
 // Filesystem walk
@@ -99,21 +36,6 @@ async function walk(dir, files = []) {
   }
   return files;
 }
-
-// ─────────────────────────────────────────────────────────────────────────
-// Schema validation (warn-only; lint reports but does not block)
-// ─────────────────────────────────────────────────────────────────────────
-
-const VALID_TYPES = new Set(['pattern', 'concept', 'failure', 'tool', 'mechanism', 'exemplar', 'profile', 'synthesis', 'playbook']);
-const VALID_RELATIONS = new Set([
-  'implements', 'violates', 'composes-with', 'supersedes', 'exemplifies',
-  'conflicts-with', 'specializes', 'generalizes', 'requires', 'enables', 'mitigates',
-  // Inverse forms used during migration (treated as v1-compat aliases)
-  'implemented-by', 'mitigated-by', 'enabled-by', 'required-by', 'composed-with',
-]);
-const VALID_LIFECYCLE = new Set(['current', 'review-soon', 'stale', 'archived']);
-const ATOMIC_TYPES = new Set(['pattern', 'concept', 'failure', 'tool', 'mechanism', 'exemplar']);
-const COMPILED_TYPES = new Set(['profile', 'synthesis', 'playbook']);
 
 function validateArtifact(a) {
   const issues = [];

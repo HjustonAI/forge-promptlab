@@ -1007,3 +1007,96 @@ Pick up Phase C. Order:
 5. Wire hooks into .claude/settings.json
 6. Verify: empty corpus + lint = 0 issues → Phase D green light
 
+
+---
+
+## [2026-04-30] system | Phase C Complete — System Hardening
+
+Phase C goal: build everything the v2 instrument needs before Phase D purification, so the empty wiki passes its own lint and is ingest-ready.
+
+### Each step preceded by multi-perspective brainstorm (recorded inline in session)
+
+Brainstorms argued through: minimalist vs operationalist rules; passive guide vs executable harness skills; shared module vs per-hook duplication; strict-from-day-one vs warn-only-during-purification window; profile vs synthesis vs playbook identity boundaries.
+
+### Files written
+
+#### Ingest mode rules (10) — `.claude/rules/ingest-*.md`
+- ingest-paper.md
+- ingest-article.md
+- ingest-system-prompt.md
+- ingest-creative-prompt.md
+- ingest-deep-research.md
+- ingest-tool-doc.md
+- ingest-workflow.md
+- ingest-field-note.md
+- ingest-benchmark.md
+- ingest-idea-file.md
+
+Each ~80–120 lines, shared skeleton (Trigger / What to produce / Extraction priorities / Frontmatter defaults / Body emphasis / Anti-patterns / Ripple expectations). Path-scoped via YAML `paths` so they lazy-load only when the agent works in matching `raw/<mode>/`.
+
+#### Compile rules (3) — `.claude/rules/compile-*.md`
+- compile-profile.md — per-tool digest; tool-centric
+- compile-synthesis.md — cross-cutting analysis; topic-centric, ≥3 cases
+- compile-playbook.md — goal-oriented composition; the wrapper's primary input format. Most detailed of the three because it defines the wrapper integration contract.
+
+#### Skills (2 new + 1 existing)
+- `.claude/skills/ingest/SKILL.md` — operational form of ingest-pipeline pattern. 9-step checklist with verification at each step. Explicitly forbids the silent-skip failure modes (especially step 3 qmd-search-neighbors and step 6 ripple).
+- `.claude/skills/compile-playbook/SKILL.md` — operational form of compile-playbook rule. Step 1 (discover atomics) gate-checks readiness — refuses to compile a playbook ungrounded in atomics.
+- `.claude/skills/lint/SKILL.md` — already in place from prior session
+
+#### Hooks (5) — `.claude/hooks/*.mjs` — strict from day one
+- validate-frontmatter.mjs — schema validation, required fields by type, enum checks, see_also typing, tldr-280-cap
+- block-raw-edits.mjs — raw immutability, envelope-sidecar exception
+- check-dedupe-key.mjs — reads INDEX.json, blocks on collision unless supersedes is set, helpful 3-option resolution message
+- enforce-tag-vocab.mjs — parses taxonomy.md, blocks on unregistered domains/tags/tools
+- regenerate-index-json.mjs — PostToolUse async; spawns lint detached, never blocks
+
+All hooks use the Claude Code stdin-JSON protocol. All errors are actionable (specific field name + how to fix + reference to spec).
+
+#### Shared library — `.claude/lib/frontmatter.mjs`
+Single source of truth for frontmatter extraction and schema enums (VALID_TYPES, ATOMIC_TYPES, COMPILED_TYPES, VALID_RELATIONS, VALID_LIFECYCLE, VALID_PROVENANCE_TIERS, VALID_CONFIDENCE, VALID_MODALITY). Imported by lint and all hooks. Refactored build-index.mjs to import from here — eliminates duplication, prevents schema drift between lint and hooks.
+
+#### Settings — `.claude/settings.json`
+Hooks wired as PreToolUse (matcher: Write|Edit) and PostToolUse. Added Bash permissions for `node .claude/hooks/*.mjs` and `node .claude/skills/lint/build-index.mjs`. qmd MCP and qmd command allowlist preserved.
+
+#### Directory structure
+Created empty v2 target dirs: `compiled/{playbooks,profiles,syntheses}`, `distilled/{tools,mechanisms,exemplars}`. Phase E will populate these.
+
+### Smoke tests — all passing
+
+Hooks tested with crafted stdin payloads:
+
+| Hook | Test | Result |
+|---|---|---|
+| validate-frontmatter | reject content with no frontmatter | ✅ exit 2, helpful error |
+| validate-frontmatter | accept good v2 artifact | ✅ exit 0 |
+| block-raw-edits | block raw/papers/foo.md | ✅ exit 2, helpful error |
+| block-raw-edits | allow raw/papers/foo.envelope.md | ✅ exit 0 |
+| block-raw-edits | ignore distilled/ paths | ✅ exit 0 |
+| check-dedupe-key | block collision with existing dedupe_key | ✅ exit 2, 3-option resolution message |
+| enforce-tag-vocab | block unknown tag | ✅ exit 2, helpful error |
+| regenerate-index-json | never blocks (PostToolUse) | ✅ exit 0 |
+
+### Phase C exit gate status
+
+The empty-corpus exit gate is "lint shows 0 issues on empty distilled+compiled." Cannot meet this until Phase D deletes the v1 corpus. Phase C's actual exit gate is **the empty instrument is ingest-ready** — and that gate is met:
+
+- 13 rule files in place (10 ingest + 3 compile)
+- 3 skills (lint, ingest, compile-playbook) with executable workflows
+- 5 hooks operational and smoke-tested
+- Settings.json wires hooks
+- Shared library de-duplicates extraction
+- v2 target directories created
+
+Phase C complete. Phase D unblocked.
+
+### Phase D readiness check
+
+Phase D is one decisive operation: delete the v1 corpus (`rm -rf distilled/{patterns,concepts,failures,models,references,synthesis}`), keep `raw/`, reset INDEX.json + index.md, log v2 epoch. After Phase D:
+
+- Lint should show 0 issues on empty `distilled/` and `compiled/`
+- Hooks should fire correctly on the first new v2 artifact authored in Phase E
+- qmd indexes should be cleared and rebuilt against the empty (then re-populating) state
+
+Phase D should be operator-triggered (destructive operation). I will not auto-execute.
+
